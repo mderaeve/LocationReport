@@ -1,0 +1,33 @@
+//
+//  Prefix header
+//
+//  The contents of this file are implicitly included at the beginning of every source file.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#define kOFFSET_FOR_KEYBOARDHOR 352.0
+#define kOFFSET_FOR_KEYBOARDVER 264.0
+#define kPropertyTypePerson @"$PO$Person"
+#define kPropertyTypeYesNo @"$PO$YesNo"
+#define kPropertyTypeText @"$PO$Text"
+
+#define kTemplateType @0
+#define kTemplateFull @1
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+    #import "GeneralFunctions.h"
+    #import "VariableStore.h"
+    #import "DBStore.h"
+    #import "StoryBoardNavigation.h"
+    #import "HomeVC.h"
+    #import "RoundView.h"
+    #import <iAd/iAd.h>
+#endif

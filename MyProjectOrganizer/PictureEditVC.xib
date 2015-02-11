@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PictureEditVC">
+            <connections>
+                <outlet property="btnBlack" destination="kvM-ik-Ppw" id="2Bj-cu-3HY"/>
+                <outlet property="btnDraw" destination="nYu-Vq-38d" id="2bt-NT-87V"/>
+                <outlet property="btnEdit" destination="T81-OK-Dhs" id="q6J-QE-ygQ"/>
+                <outlet property="btnGreen" destination="3dg-O6-ovD" id="K6R-Nz-Afq"/>
+                <outlet property="btnRed" destination="DzK-DC-UM9" id="Vla-cu-Pvo"/>
+                <outlet property="btnSave" destination="Mss-5U-01M" id="6rj-m1-uBx"/>
+                <outlet property="btnText" destination="lTC-dE-pDw" id="oIA-Nb-rcw"/>
+                <outlet property="btnUndo" destination="B1c-ZN-Zsp" id="VCy-Vy-Dm6"/>
+                <outlet property="btnYellow" destination="2I5-nR-qbb" id="TiJ-B9-bwO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sz2-UF-VM9">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="45"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mss-5U-01M" customClass="Button">
+                            <rect key="frame" x="20" y="0.0" width="86" height="45"/>
+                            <state key="normal" title="$PO$Save">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnSaveClicked:" destination="-1" eventType="touchUpInside" id="Xvp-72-UKe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1c-ZN-Zsp" customClass="Button">
+                            <rect key="frame" x="114" y="0.0" width="86" height="45"/>
+                            <state key="normal" title="$PO$Undo">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnUndoClicked:" destination="-1" eventType="touchUpInside" id="0Yd-Og-yRS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T81-OK-Dhs" customClass="Button">
+                            <rect key="frame" x="662" y="0.0" width="86" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="86" id="pMm-ef-GDS"/>
+                            </constraints>
+                            <state key="normal" title="$PO$Draw">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnEditClicked:" destination="-1" eventType="touchUpInside" id="EuC-6s-gJW"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DzK-DC-UM9" customClass="SimpelButton">
+                            <rect key="frame" x="500" y="0.0" width="46" height="44"/>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="ER8-ep-fgb"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnRedClicked:" destination="-1" eventType="touchUpInside" id="w6N-2D-IWa"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3dg-O6-ovD" customClass="SimpelButton">
+                            <rect key="frame" x="554" y="0.0" width="46" height="44"/>
+                            <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="8wx-Ff-xSh"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnGreenClicked:" destination="-1" eventType="touchUpInside" id="7Ir-ss-MJa"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kvM-ik-Ppw" customClass="SimpelButton">
+                            <rect key="frame" x="446" y="0.0" width="46" height="44"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="Qrl-Ks-KQ7"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnBlackClicked:" destination="-1" eventType="touchUpInside" id="Lmd-Hs-feX"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2I5-nR-qbb" customClass="SimpelButton">
+                            <rect key="frame" x="608" y="0.0" width="46" height="44"/>
+                            <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="ser-Zy-HpF"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnYellowClicked:" destination="-1" eventType="touchUpInside" id="mr2-a6-3kg"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lTC-dE-pDw" customClass="SimpelButton">
+                            <rect key="frame" x="392" y="0.0" width="46" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="xEu-iN-y0e"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <state key="normal" title="A-Z">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnAZClicked:" destination="-1" eventType="touchUpInside" id="LYb-K5-XfK"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nYu-Vq-38d" customClass="SimpelButton">
+                            <rect key="frame" x="338" y="1" width="46" height="44"/>
+                            <state key="normal" image="pencil.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btnAZClicked:" destination="-1" eventType="touchUpInside" id="azz-Ez-dgm"/>
+                                <action selector="btnDrawClicked:" destination="-1" eventType="touchUpInside" id="ufk-9e-Fz6"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="3dg-O6-ovD" firstAttribute="leading" secondItem="DzK-DC-UM9" secondAttribute="trailing" constant="8" id="3Ig-Wi-sFc"/>
+                        <constraint firstItem="DzK-DC-UM9" firstAttribute="leading" secondItem="kvM-ik-Ppw" secondAttribute="trailing" constant="8" id="3cN-vk-ZJv"/>
+                        <constraint firstItem="T81-OK-Dhs" firstAttribute="leading" secondItem="2I5-nR-qbb" secondAttribute="trailing" constant="8" id="GKb-dF-vPH"/>
+                        <constraint firstItem="2I5-nR-qbb" firstAttribute="leading" secondItem="3dg-O6-ovD" secondAttribute="trailing" constant="8" id="xM7-2V-M8W"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="pencil.png" width="23" height="23"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

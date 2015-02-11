@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="8A9-yT-2QI">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Edit PictureVC-->
+        <scene sceneID="MCS-XO-QXn">
+            <objects>
+                <viewController id="8A9-yT-2QI" customClass="EditPictureVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ihF-dC-eOY"/>
+                        <viewControllerLayoutGuide type="bottom" id="rgV-HM-uWy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="B8C-GR-w8q">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OfH-ks-Hmu">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OfH-ks-Hmu" firstAttribute="leading" secondItem="B8C-GR-w8q" secondAttribute="leading" id="Dli-1O-zlS"/>
+                            <constraint firstAttribute="trailing" secondItem="OfH-ks-Hmu" secondAttribute="trailing" id="HsQ-gq-3xa"/>
+                            <constraint firstItem="OfH-ks-Hmu" firstAttribute="top" secondItem="B8C-GR-w8q" secondAttribute="top" id="cN9-dZ-AYB"/>
+                            <constraint firstItem="rgV-HM-uWy" firstAttribute="top" secondItem="OfH-ks-Hmu" secondAttribute="bottom" id="kgC-Ko-PA7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainImage" destination="OfH-ks-Hmu" id="Lav-2T-1Cj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bjh-Hu-R1Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2211" y="-1035"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>

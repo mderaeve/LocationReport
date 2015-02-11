@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="AUPerson" representedClassName="AUPerson" syncable="YES">
+        <attribute name="pers_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="pers_created_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pers_email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pers_firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pers_id" attributeType="Integer 64" minValueString="0" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="pers_lastname" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AUPicture" representedClassName="AUPicture" syncable="YES">
+        <attribute name="pic_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="pic_created_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pic_id" attributeType="Integer 64" minValueString="0" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="pic_seq" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pic_url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AUProject" representedClassName="AUProject" syncable="YES">
+        <attribute name="pic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="proj_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="proj_created_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="proj_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="proj_id" attributeType="Integer 64" minValueString="0" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="proj_info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="proj_isTemplate" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="proj_status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="proj_templateType" optional="YES" attributeType="Integer 16" syncable="YES"/>
+        <attribute name="proj_templateUsed_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="proj_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prop_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sectionIdentifier" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionIdentifier2" optional="YES" transient="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AUProperty" representedClassName="AUProperty" syncable="YES">
+        <attribute name="prop_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="prop_created_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prop_id" attributeType="Integer 64" minValueString="0" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="prop_seq" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="prop_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prop_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prop_value" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AUPropertyTemplate" representedClassName="AUPropertyTemplate" syncable="YES">
+        <attribute name="prop_default_value" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prop_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prop_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="templ_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="templ_title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AUSubZone" representedClassName="AUSubZone" syncable="YES">
+        <attribute name="pic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="prop_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sectionIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionIdentifier2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sz_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sz_created_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sz_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sz_id" attributeType="Integer 64" minValueString="0" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="sz_info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sz_title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="z_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="AUTranslation" representedClassName="AUTranslation" syncable="YES">
+        <attribute name="trans_language" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trans_tag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="trans_translated" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AUZone" representedClassName="AUZone" syncable="YES">
+        <attribute name="pic_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="proj_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="prop_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="sectionIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionIdentifier2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="z_created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="z_created_by" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="z_date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="z_id" attributeType="Integer 64" minValueString="0" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="z_info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="z_templateUsed_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="z_title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AUPerson" positionX="36" positionY="180" width="128" height="133"/>
+        <element name="AUPicture" positionX="18" positionY="171" width="128" height="118"/>
+        <element name="AUProject" positionX="-54" positionY="-9" width="128" height="255"/>
+        <element name="AUProperty" positionX="0" positionY="162" width="128" height="148"/>
+        <element name="AUPropertyTemplate" positionX="-9" positionY="135" width="128" height="118"/>
+        <element name="AUSubZone" positionX="-18" positionY="126" width="128" height="208"/>
+        <element name="AUTranslation" positionX="0" positionY="153" width="128" height="88"/>
+        <element name="AUZone" positionX="-36" positionY="72" width="128" height="223"/>
+    </elements>
+</model>
