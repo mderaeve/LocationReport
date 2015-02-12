@@ -35,6 +35,13 @@
 		87D5ABB41A8BDE2F00FCD98D /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABB11A8BDE2F00FCD98D /* SyncService.m */; };
 		87D5ABB51A8BDE2F00FCD98D /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABB31A8BDE2F00FCD98D /* BaseService.m */; };
 		87D5ABB81A8BDEFD00FCD98D /* PropertyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABB71A8BDEFD00FCD98D /* PropertyUtil.m */; };
+		87D5ABBE1A8C7D2000FCD98D /* DSBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABBD1A8C7D2000FCD98D /* DSBaseObject.m */; };
+		87D5ABC11A8C7D5E00FCD98D /* DSProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABC01A8C7D5E00FCD98D /* DSProject.m */; };
+		87D5ABC71A8C7DCB00FCD98D /* DSProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABC61A8C7DCB00FCD98D /* DSProperty.m */; };
+		87D5ABCA1A8C7DD800FCD98D /* DSZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABC91A8C7DD800FCD98D /* DSZone.m */; };
+		87D5ABCD1A8C7DEC00FCD98D /* DSSubZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABCC1A8C7DEC00FCD98D /* DSSubZone.m */; };
+		87D5ABD01A8C7DFD00FCD98D /* DSPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABCF1A8C7DFD00FCD98D /* DSPicture.m */; };
+		87D5ABD31A8C7F2900FCD98D /* ProjectService.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABD21A8C7F2900FCD98D /* ProjectService.m */; };
 		87DDA01A19C1925E004A3152 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DDA01919C1925E004A3152 /* edit.png */; };
 		87DDA02019C192FC004A3152 /* ProjectReportsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DDA01F19C192FC004A3152 /* ProjectReportsVC.m */; };
 		87DDA02219C2EBC8004A3152 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DDA02119C2EBC8004A3152 /* download.png */; };
@@ -151,6 +158,20 @@
 		87D5ABB31A8BDE2F00FCD98D /* BaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseService.m; sourceTree = "<group>"; };
 		87D5ABB61A8BDEFD00FCD98D /* PropertyUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyUtil.h; sourceTree = "<group>"; };
 		87D5ABB71A8BDEFD00FCD98D /* PropertyUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyUtil.m; sourceTree = "<group>"; };
+		87D5ABBC1A8C7D2000FCD98D /* DSBaseObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSBaseObject.h; sourceTree = "<group>"; };
+		87D5ABBD1A8C7D2000FCD98D /* DSBaseObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSBaseObject.m; sourceTree = "<group>"; };
+		87D5ABBF1A8C7D5E00FCD98D /* DSProject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSProject.h; path = Models/DSProject.h; sourceTree = "<group>"; };
+		87D5ABC01A8C7D5E00FCD98D /* DSProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSProject.m; path = Models/DSProject.m; sourceTree = "<group>"; };
+		87D5ABC51A8C7DCB00FCD98D /* DSProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSProperty.h; path = Models/DSProperty.h; sourceTree = "<group>"; };
+		87D5ABC61A8C7DCB00FCD98D /* DSProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSProperty.m; path = Models/DSProperty.m; sourceTree = "<group>"; };
+		87D5ABC81A8C7DD800FCD98D /* DSZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSZone.h; path = Models/DSZone.h; sourceTree = "<group>"; };
+		87D5ABC91A8C7DD800FCD98D /* DSZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSZone.m; path = Models/DSZone.m; sourceTree = "<group>"; };
+		87D5ABCB1A8C7DEC00FCD98D /* DSSubZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSSubZone.h; path = Models/DSSubZone.h; sourceTree = "<group>"; };
+		87D5ABCC1A8C7DEC00FCD98D /* DSSubZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSSubZone.m; path = Models/DSSubZone.m; sourceTree = "<group>"; };
+		87D5ABCE1A8C7DFD00FCD98D /* DSPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSPicture.h; path = Models/DSPicture.h; sourceTree = "<group>"; };
+		87D5ABCF1A8C7DFD00FCD98D /* DSPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSPicture.m; path = Models/DSPicture.m; sourceTree = "<group>"; };
+		87D5ABD11A8C7F2900FCD98D /* ProjectService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProjectService.h; path = Services/ProjectService.h; sourceTree = "<group>"; };
+		87D5ABD21A8C7F2900FCD98D /* ProjectService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProjectService.m; path = Services/ProjectService.m; sourceTree = "<group>"; };
 		87DDA01919C1925E004A3152 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		87DDA01E19C192FC004A3152 /* ProjectReportsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectReportsVC.h; sourceTree = "<group>"; };
 		87DDA01F19C192FC004A3152 /* ProjectReportsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectReportsVC.m; sourceTree = "<group>"; };
@@ -347,6 +368,8 @@
 				87D5ABB11A8BDE2F00FCD98D /* SyncService.m */,
 				87D5ABB21A8BDE2F00FCD98D /* BaseService.h */,
 				87D5ABB31A8BDE2F00FCD98D /* BaseService.m */,
+				87D5ABD11A8C7F2900FCD98D /* ProjectService.h */,
+				87D5ABD21A8C7F2900FCD98D /* ProjectService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -354,6 +377,18 @@
 		87D5ABBB1A8BDF2400FCD98D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				87D5ABBC1A8C7D2000FCD98D /* DSBaseObject.h */,
+				87D5ABBD1A8C7D2000FCD98D /* DSBaseObject.m */,
+				87D5ABBF1A8C7D5E00FCD98D /* DSProject.h */,
+				87D5ABC01A8C7D5E00FCD98D /* DSProject.m */,
+				87D5ABC51A8C7DCB00FCD98D /* DSProperty.h */,
+				87D5ABC61A8C7DCB00FCD98D /* DSProperty.m */,
+				87D5ABC81A8C7DD800FCD98D /* DSZone.h */,
+				87D5ABC91A8C7DD800FCD98D /* DSZone.m */,
+				87D5ABCB1A8C7DEC00FCD98D /* DSSubZone.h */,
+				87D5ABCC1A8C7DEC00FCD98D /* DSSubZone.m */,
+				87D5ABCE1A8C7DFD00FCD98D /* DSPicture.h */,
+				87D5ABCF1A8C7DFD00FCD98D /* DSPicture.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -821,6 +856,7 @@
 				8777D41619CA36060098EC55 /* Model.xcdatamodeld in Sources */,
 				997BBA1E190508C1008A0626 /* ZoneCell.m in Sources */,
 				994EAB6418EC369600137F27 /* GeneralFunctions.m in Sources */,
+				87D5ABC11A8C7D5E00FCD98D /* DSProject.m in Sources */,
 				997BDFED19367F86005002E0 /* ObjectPicker.m in Sources */,
 				870B628C19BE316D00273483 /* MainView.m in Sources */,
 				99F2557218FDB33000FAB43E /* ZoneVC.m in Sources */,
@@ -838,12 +874,17 @@
 				8777D43419CC56B30098EC55 /* ZoneReportsVC.m in Sources */,
 				9912E2B419216F1B0054358B /* TransCell.m in Sources */,
 				87D5ABB81A8BDEFD00FCD98D /* PropertyUtil.m in Sources */,
+				87D5ABCA1A8C7DD800FCD98D /* DSZone.m in Sources */,
+				87D5ABD31A8C7F2900FCD98D /* ProjectService.m in Sources */,
+				87D5ABD01A8C7DFD00FCD98D /* DSPicture.m in Sources */,
 				9912E3041924024F0054358B /* NAVButton.m in Sources */,
 				994EAB8B18EDC3C300137F27 /* Button.m in Sources */,
+				87D5ABCD1A8C7DEC00FCD98D /* DSSubZone.m in Sources */,
 				997BDFE6193624BC005002E0 /* SettingsMenuVC.m in Sources */,
 				997BDFFE193E53DF005002E0 /* PictureEditVC.m in Sources */,
 				8777D41F19CAFA9F0098EC55 /* AUPropertyTemplate.m in Sources */,
 				8777D43119CAFCB50098EC55 /* AUProject.m in Sources */,
+				87D5ABBE1A8C7D2000FCD98D /* DSBaseObject.m in Sources */,
 				997BBA2419063BBF008A0626 /* LeveyPopListView.m in Sources */,
 				87B2324519B3AA9400378E49 /* DateHeader.m in Sources */,
 				9912E30B192D43520054358B /* TextView.m in Sources */,
@@ -868,6 +909,7 @@
 				994EAB8018EDBF1B00137F27 /* DefaultViewController.m in Sources */,
 				9912E2B119216C640054358B /* TranslationsHomeVC.m in Sources */,
 				87D5ABB41A8BDE2F00FCD98D /* SyncService.m in Sources */,
+				87D5ABC71A8C7DCB00FCD98D /* DSProperty.m in Sources */,
 				8777D42E19CAFB450098EC55 /* AUTranslation.m in Sources */,
 				997BBA6E1906F716008A0626 /* SubZonesVC.m in Sources */,
 				87B56B7A19C8C7A70050A37B /* AddPropertyVC.m in Sources */,

@@ -7,8 +7,6 @@
 //
 
 #import "SyncService.h"
-//#import "DSDataService.h"
-#import "DBStore.h"
 #import "MBProgressHUD.h"
 
 
@@ -22,8 +20,14 @@
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.labelText = @"Data ophalen en versturen...";
     
+    //For each product, sub product, property, picture, zone, property, picture, subzone, property, picture.
     
+    NSArray * projectList = [DBStore GetAllProjects:0 ];
     
+    for (AUProject * project in projectList)
+    {
+        
+    }
     
     /*ProductService *service = [ProductService service];
     [service getAllProducts:[NSDate date] withResultHandler:^(BOOL success, NSArray * result, id errorOrNil)
