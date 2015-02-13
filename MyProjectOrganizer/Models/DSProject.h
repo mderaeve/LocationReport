@@ -10,6 +10,7 @@
 
 @interface DSProject : DSBaseObject
 
+@property (nonatomic, retain) NSString * comp_id;
 @property (nonatomic, retain) NSNumber * proj_id;
 @property (nonatomic, retain) NSString * proj_title;
 @property (nonatomic, retain) NSString * proj_info;
@@ -24,5 +25,6 @@
 @property (nonatomic, retain) NSNumber * proj_isTemplate;
 @property (nonatomic, retain) NSNumber * proj_templateType;
 @property (nonatomic, retain) NSNumber * proj_templateUsed_id;
+
 
 @end

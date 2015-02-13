@@ -8,6 +8,7 @@
 
 #import "SyncService.h"
 #import "MBProgressHUD.h"
+#import "ProjectService.h"
 
 
 @implementation SyncService
@@ -19,16 +20,34 @@
     hud.mode = MBProgressHUDModeText;
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.labelText = @"Data ophalen en versturen...";
-    
+    VariableStore * store = [VariableStore sharedInstance];
     //For each product, sub product, property, picture, zone, property, picture, subzone, property, picture.
     
-    NSArray * projectList = [DBStore GetAllProjects:0 ];
-    
-    for (AUProject * project in projectList)
+    NSArray * projectList = [DBStore GetAllProjects:[NSNumber numberWithInt:0]];
+    ProjectService * projectService = [[ProjectService alloc] init];
+    if(projectList && projectList.count >0)
     {
-        
+        for (AUProject * project in projectList)
+        {
+            DSProject * p = [[DSProject alloc] init];
+            p.comp_id = store.userToken;
+            p.prop_id = project.prop_id;
+            p.proj_title = project.proj_title;
+            p.proj_id = project.proj_id;
+            p.proj_date = project.proj_date;
+            p.proj_info = project.proj_info;
+            [projectService syncProject:p withResultHandler:^(BOOL success, id errorOrNil) {
+                //Check if its working
+                [hud hide:YES];
+            }];
+            
+            
+        }
     }
-    
+    else
+    {
+        [hud hide:YES];
+    }
     /*ProductService *service = [ProductService service];
     [service getAllProducts:[NSDate date] withResultHandler:^(BOOL success, NSArray * result, id errorOrNil)
     {

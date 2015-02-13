@@ -10,6 +10,7 @@
 
 @interface DSSubZone : DSBaseObject
 
+@property (nonatomic, retain) NSString * comp_id;
 @property (nonatomic, retain) NSNumber * pic_id;
 @property (nonatomic, retain) NSNumber * prop_id;
 @property (nonatomic, retain) NSString * sectionIdentifier;

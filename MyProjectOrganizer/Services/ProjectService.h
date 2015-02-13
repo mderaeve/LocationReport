@@ -13,6 +13,6 @@
 
 typedef void (^SyncProjectsResultBlock)(BOOL success, id errorOrNil);
 
--(void) syncProject:(DSProject *) p withProperties:(id) props andPictures:(id) pics withResultHandler:(SyncProjectsResultBlock) resultHandler;
+-(void) syncProject:(DSProject *) p withResultHandler:(SyncProjectsResultBlock) resultHandler;
 
 @end

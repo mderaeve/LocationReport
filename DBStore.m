@@ -437,8 +437,39 @@
 
 +(void) DeleteProperty:(AUProperty *) property;
 {
-    [[DBStore GetManagedObjectContext] deleteObject:property];
-    [DBStore SaveContext];
+    //check if there are more properties with this id, if not, clear the propid from the proj, zone or subzone
+    NSArray * props = [DBStore GetAllPropertiesForID:property.prop_id];
+    if (props)
+    {
+        if ( props.count == 1)
+        {
+            //Delete the prop id from the selected obj
+            if([VariableStore sharedInstance].selectedSubZone)
+            {
+                if ([VariableStore sharedInstance].selectedSubZone.prop_id == property.prop_id)
+                {
+                    [VariableStore sharedInstance].selectedSubZone.prop_id = nil;
+                }
+            }
+            else if([VariableStore sharedInstance].selectedZone)
+            {
+                if ([VariableStore sharedInstance].selectedZone.prop_id == property.prop_id)
+                {
+                    [VariableStore sharedInstance].selectedZone.prop_id = nil;
+                }
+            }
+            else if([VariableStore sharedInstance].selectedProject)
+            {
+                if ([VariableStore sharedInstance].selectedProject.prop_id == property.prop_id)
+                {
+                    [VariableStore sharedInstance].selectedProject.prop_id = nil;
+                }
+            }
+        }
+    
+        [[DBStore GetManagedObjectContext] deleteObject:property];
+        [DBStore SaveContext];
+    }
 }
 
 #pragma mark Picture

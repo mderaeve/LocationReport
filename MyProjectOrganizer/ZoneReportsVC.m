@@ -123,8 +123,12 @@
     if ([store.selectedZone.prop_id intValue]>0)
     {
         propertiesForZone = [DBStore GetAllPropertiesForID:store.selectedZone.prop_id];
-        [self.colProperties reloadData];
     }
+    else
+    {
+        propertiesForZone = nil;
+    }
+    [self.colProperties reloadData];
 }
 
 - (IBAction)btnAddProperty:(id)sender

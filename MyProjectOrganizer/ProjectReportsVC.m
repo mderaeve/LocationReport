@@ -250,8 +250,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     if ([store.selectedProject.prop_id intValue]>0)
     {
         propertiesForProject = [DBStore GetAllPropertiesForID:store.selectedProject.prop_id];
-        [self.colProperties reloadData];
     }
+    else
+    {
+        propertiesForProject = nil;
+    }
+    [self.colProperties reloadData];
 }
 
 - (IBAction)btnAddProperty:(id)sender

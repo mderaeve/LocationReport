@@ -10,6 +10,7 @@
 #import "ProjectCell.h"
 #import "DateHeader.h"
 #import "TemplateChooser.h"
+#import "SyncService.h"
 
 @interface ProjectHomeVC ()
 
@@ -37,10 +38,56 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    VariableStore * store = [VariableStore sharedInstance];
+
     // Do any additional setup after loading the view.
     [GeneralFunctions TranslateView:self.view];
-    [self setTitle:[[VariableStore sharedInstance] Translate:@"$PO$ProjectHome"]];
+    [self setTitle:[store Translate:@"$PO$ProjectHome"]];
     [GeneralFunctions MakeRoundView:self.vwReports];
+    
+    //Get user token if not found
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString * userToken = [defaults objectForKey:userTokenDefaultsKey];
+    
+    if (userToken && ![userToken isEqualToString:@""])
+    {
+        store.userToken = userToken;
+    }
+    
+    if (!store.userToken)
+    {
+        UIAlertController *alertController = [UIAlertController
+                                              alertControllerWithTitle:[store Translate:@"Identificatie"]
+                                              message:[store Translate:@"Geef je usertoken in:"]
+                                              preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+         {
+             textField.placeholder = [store Translate:@"Usertoken"];
+         }];
+        
+        //Request a user token
+        UIAlertAction *okAction = [UIAlertAction
+                                   actionWithTitle:[store Translate:@"Bewaar"]
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       UITextField *login = alertController.textFields.firstObject;
+                                       store.userToken = login.text;
+                                       NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                       [defaults setObject:store.userToken forKey:userTokenDefaultsKey];
+                                   }];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+
+    
+}
+
+- (IBAction)btnSync:(id)sender
+{
+    [SyncService SyncProducts:self.view];
 }
 
 - (IBAction)selSortChanged:(id)sender

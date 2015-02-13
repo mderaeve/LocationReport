@@ -10,9 +10,9 @@
 
 @implementation ProjectService
 
--(void) syncProject:(DSProject *) p withProperties:(id) props andPictures:(id) pics withResultHandler:(SyncProjectsResultBlock) resultHandler
+-(void) syncProject:(DSProject *) p withResultHandler:(SyncProjectsResultBlock) resultHandler
 {
-    NSString *serviceName = @"SyncProjects";
+    NSString *serviceName = @"Projects";
     [self performPost:serviceName withParameters:p withSuccesHandler:^(id result) {
         resultHandler(YES,nil);
     } andErrorHandler:^(NSError *error)
