@@ -20,7 +20,6 @@
     
     NSArray *propsList = [[self class] propertyList];
     for(NSString *key in propsList){
-        //NSString *serverKey = [self serverKeyForProperty:key];
         [props setValue:key forKey:key];
     }
     
@@ -32,10 +31,5 @@
     return [properties allKeys];
 }
 
-+(NSString *) serverKeyForProperty:(NSString *) property {
-    NSString *serverKey = [property stringByReplacingCharactersInRange:NSMakeRange(0,1)
-                                                            withString:[[property substringToIndex:1] capitalizedString]];
-    return serverKey;
-}
 @end
 

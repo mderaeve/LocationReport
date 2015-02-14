@@ -1,5 +1,5 @@
 //
-//  BaseService.h
+//  BaseService.m
 //  BioBodyCare
 //
 //  Created by Mark Deraeve on 07/01/15.
@@ -10,7 +10,6 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-
 @interface BaseService : NSObject
 + (instancetype) service;
 
@@ -20,11 +19,14 @@
   withSuccesHandler:(void (^)(id result)) completion
     andErrorHandler:(void (^)(NSError *error))failure;
 
--(void) performGetRequest:(NSString *)serviceName withParameters:(NSDictionary *) parameters
+-(void) performGetRequest:(NSString *)serviceName withParameters:(id) parameters
         withSuccesHandler:(void (^)(id result)) completion
           andErrorHandler:(void (^)(NSError *error))failure;
 
--(BOOL) isErrorResponse:(id) response;
+-(void) performDelete:(NSString *)serviceName withParameters:(id) parameters
+    withSuccesHandler:(void (^)(id result)) completion
+      andErrorHandler:(void (^)(NSError *error))failure;
+
 
 + (NSDateFormatter*)dateFormatter;
 @end

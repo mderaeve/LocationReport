@@ -13,5 +13,4 @@
 
 + (NSArray *) propertyList;
 
-+(NSString *) serverKeyForProperty:(NSString *) property;
 @end

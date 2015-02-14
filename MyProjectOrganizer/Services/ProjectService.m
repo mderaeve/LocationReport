@@ -13,11 +13,39 @@
 -(void) syncProject:(DSProject *) p withResultHandler:(SyncProjectsResultBlock) resultHandler
 {
     NSString *serviceName = @"Projects";
-    [self performPost:serviceName withParameters:p withSuccesHandler:^(id result) {
+    NSDictionary* pDict = [p toDictionary];
+    [self performPost:serviceName withParameters:pDict withSuccesHandler:^(id result) {
         resultHandler(YES,nil);
     } andErrorHandler:^(NSError *error)
      {
          resultHandler(NO,error);
+     }];
+}
+
+-(void) getAllProjects:(GetProjectsResultBlock) resultHandler
+{
+    
+    NSString *serviceName = @"Projects";
+    
+    [self performGetRequest:serviceName withParameters:nil withSuccesHandler:^(NSDictionary* result)
+     {
+         NSMutableArray *results = [NSMutableArray array];
+         if (results)
+         {
+             for(NSDictionary *dict in result){
+                 NSError *error;
+                 DSProject *p = [[DSProject alloc] initWithDictionary:dict error:&error];
+                 
+                 if(!error){
+                     [results addObject:p];
+                 } else {
+                     NSLog(@"Error decoding Team: %@", error);
+                 }
+             }
+         }
+         resultHandler(YES, [NSArray arrayWithArray:results], nil);
+     } andErrorHandler:^(NSError *error) {
+         resultHandler(NO, nil, error);
      }];
 }
 

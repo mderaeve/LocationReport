@@ -116,7 +116,7 @@
     p.proj_info   = info;
     p.proj_status = @"Open";
     p.proj_created = [NSDate date];
-    p.proj_created_by = @"test";
+    p.proj_created_by = [VariableStore sharedInstance].userToken;
     p.proj_date = projectDate;
     p.prop_id = nil;
     p.pic_id = nil;
@@ -258,6 +258,7 @@
     z.z_title = title;
     z.z_info   = info;
     z.z_created = [NSDate date];
+    z.z_created_by = [VariableStore sharedInstance].userToken;
     NSError *error;
     if(![[DBStore GetManagedObjectContext] save:&error])
     {
@@ -315,7 +316,7 @@
     sz.sz_title = title;
     sz.sz_info   = info;
     sz.sz_created = [NSDate date];
-
+    sz.sz_created_by = [VariableStore sharedInstance].userToken;
     NSError *error;
     if(![[DBStore GetManagedObjectContext] save:&error])
     {
@@ -367,28 +368,29 @@
 
 + (AUProperty *) CreateProperty:(NSString *) title AndValue:(NSString *) value AndType:(NSString *) property_type AndPropertyID:(NSNumber *) propertyID;
 {
-    AUProperty * z = [NSEntityDescription insertNewObjectForEntityForName:@"AUProperty" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    AUProperty * p = [NSEntityDescription insertNewObjectForEntityForName:@"AUProperty" inManagedObjectContext:[DBStore GetManagedObjectContext]];
     if([propertyID intValue] > 0)
     {
-        z.prop_id = propertyID;
+        p.prop_id = propertyID;
     }
     else
     {
         NSNumber * test = [DBStore GetIDForEntity:@"AUProperty" AndKeyPath:@"prop_id" AndFetchDescription:@"maxprop_id"];
-        z.prop_id = test;
+        p.prop_id = test;
     }
-    z.prop_type = property_type;
-    z.prop_value = value;
-    z.prop_title = title;
-    int seq = [[DBStore GetMaxForEntity:@"AUProperty" AndKeyPath:@"prop_seq" AndFetchDescription:@"maxseqdescr" AndPredicate:[NSString stringWithFormat:@"prop_id = %@", z.prop_id]] intValue] +1   ;
-    z.prop_seq = [NSNumber numberWithInt:seq];
+    p.prop_type = property_type;
+    p.prop_value = value;
+    p.prop_title = title;
+    int seq = [[DBStore GetMaxForEntity:@"AUProperty" AndKeyPath:@"prop_seq" AndFetchDescription:@"maxseqdescr" AndPredicate:[NSString stringWithFormat:@"prop_id = %@", p.prop_id]] intValue] +1   ;
+    p.prop_seq = [NSNumber numberWithInt:seq];
+    p.prop_created_by = [VariableStore sharedInstance].userToken;
     NSError *error;
     if(![[DBStore GetManagedObjectContext] save:&error])
     {
         NSLog(@"Error saving property to local database: %@", [error localizedDescription]);
     }
     
-    return z;
+    return p;
 }
 
 + (NSArray *) GetAllPropertiesForID:(NSNumber *)property_id
@@ -491,6 +493,7 @@
     int seq = [[DBStore GetMaxForEntity:@"AUPicture" AndKeyPath:@"pic_seq" AndFetchDescription:@"maxseqdescr" AndPredicate:[NSString stringWithFormat:@"pic_id = %@", pic.pic_id]] intValue] +1   ;
     pic.pic_seq = [NSNumber numberWithInt:seq];
     pic.pic_created = [NSDate date];
+    pic.pic_created_by = [VariableStore sharedInstance].userToken;
     //pic.uploaded = NO;
     return pic;
 }

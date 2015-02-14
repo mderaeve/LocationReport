@@ -16,6 +16,8 @@
 + (void) SyncProducts:(UIView *) vw
 {
     
+    
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:vw animated:YES];
     hud.mode = MBProgressHUDModeText;
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
@@ -25,17 +27,34 @@
     
     NSArray * projectList = [DBStore GetAllProjects:[NSNumber numberWithInt:0]];
     ProjectService * projectService = [[ProjectService alloc] init];
+    
+    [projectService getAllProjects:^(BOOL success, NSArray *projects, id errorOrNil) {
+        for (DSProject * p in projects)
+        {
+            NSLog(p.proj_title);
+        }
+    }];
+     
     if(projectList && projectList.count >0)
     {
         for (AUProject * project in projectList)
         {
             DSProject * p = [[DSProject alloc] init];
             p.comp_id = store.userToken;
-            p.prop_id = project.prop_id;
             p.proj_title = project.proj_title;
             p.proj_id = project.proj_id;
-            p.proj_date = project.proj_date;
             p.proj_info = project.proj_info;
+            
+            /*p.prop_id = project.prop_id ? project.prop_id:[NSNumber numberWithInt:0];
+            p.pic_id = project.pic_id ? project.pic_id:[NSNumber numberWithInt:0];
+            p.proj_date = project.proj_date;
+            p.proj_isTemplate = project.proj_isTemplate;
+            p.proj_status = project.proj_status;
+            p.proj_templateType = project.proj_templateType ? project.proj_isTemplate:[NSNumber numberWithInt:0];
+            p.proj_templateUsed_id = project.proj_templateUsed_id ? project.proj_templateUsed_id:[NSNumber numberWithInt:0];
+            p.proj_date = project.proj_date;
+            p.proj_created_by = p.proj_created_by ? project.proj_created_by : store.userToken;
+            p.proj_created = project.proj_created;*/
             [projectService syncProject:p withResultHandler:^(BOOL success, id errorOrNil) {
                 //Check if its working
                 [hud hide:YES];

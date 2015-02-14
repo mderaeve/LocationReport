@@ -12,7 +12,10 @@
 @interface ProjectService : BaseService
 
 typedef void (^SyncProjectsResultBlock)(BOOL success, id errorOrNil);
+typedef void (^GetProjectsResultBlock)(BOOL success, NSArray * projects,  id errorOrNil);
 
 -(void) syncProject:(DSProject *) p withResultHandler:(SyncProjectsResultBlock) resultHandler;
+
+-(void) getAllProjects:(GetProjectsResultBlock) resultHandler;
 
 @end
