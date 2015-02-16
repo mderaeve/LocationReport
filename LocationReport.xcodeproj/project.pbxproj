@@ -15,6 +15,10 @@
 		870DC29819D587B3009498AF /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 870DC29719D587B3009498AF /* pencil.png */; };
 		870DC29D19D58D36009498AF /* TypesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 870DC29B19D58D36009498AF /* TypesManager.m */; };
 		870DC29E19D58D36009498AF /* TypesManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870DC29C19D58D36009498AF /* TypesManager.xib */; };
+		8761E4D51A90E7130004A3BE /* ZoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4D41A90E7130004A3BE /* ZoneService.m */; };
+		8761E4D81A90E7230004A3BE /* SubZoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4D71A90E7230004A3BE /* SubZoneService.m */; };
+		8761E4DB1A90E7340004A3BE /* PropertyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4DA1A90E7340004A3BE /* PropertyService.m */; };
+		8761E4DE1A90E74E0004A3BE /* PictureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4DD1A90E74E0004A3BE /* PictureService.m */; };
 		8777D41619CA36060098EC55 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8777D41419CA36060098EC55 /* Model.xcdatamodeld */; };
 		8777D41919CAFA9E0098EC55 /* AUPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8777D41819CAFA9E0098EC55 /* AUPicture.m */; };
 		8777D41F19CAFA9F0098EC55 /* AUPropertyTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8777D41E19CAFA9F0098EC55 /* AUPropertyTemplate.m */; };
@@ -121,6 +125,14 @@
 		870DC29A19D58D36009498AF /* TypesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypesManager.h; sourceTree = "<group>"; };
 		870DC29B19D58D36009498AF /* TypesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypesManager.m; sourceTree = "<group>"; };
 		870DC29C19D58D36009498AF /* TypesManager.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TypesManager.xib; sourceTree = "<group>"; };
+		8761E4D31A90E7130004A3BE /* ZoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZoneService.h; path = Services/ZoneService.h; sourceTree = "<group>"; };
+		8761E4D41A90E7130004A3BE /* ZoneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZoneService.m; path = Services/ZoneService.m; sourceTree = "<group>"; };
+		8761E4D61A90E7230004A3BE /* SubZoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubZoneService.h; path = Services/SubZoneService.h; sourceTree = "<group>"; };
+		8761E4D71A90E7230004A3BE /* SubZoneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubZoneService.m; path = Services/SubZoneService.m; sourceTree = "<group>"; };
+		8761E4D91A90E7340004A3BE /* PropertyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyService.h; path = Services/PropertyService.h; sourceTree = "<group>"; };
+		8761E4DA1A90E7340004A3BE /* PropertyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyService.m; path = Services/PropertyService.m; sourceTree = "<group>"; };
+		8761E4DC1A90E74E0004A3BE /* PictureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PictureService.h; path = Services/PictureService.h; sourceTree = "<group>"; };
+		8761E4DD1A90E74E0004A3BE /* PictureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PictureService.m; path = Services/PictureService.m; sourceTree = "<group>"; };
 		8777D41519CA36060098EC55 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8777D41719CAFA9E0098EC55 /* AUPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUPicture.h; sourceTree = "<group>"; };
 		8777D41819CAFA9E0098EC55 /* AUPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUPicture.m; sourceTree = "<group>"; };
@@ -370,6 +382,14 @@
 				87D5ABB31A8BDE2F00FCD98D /* BaseService.m */,
 				87D5ABD11A8C7F2900FCD98D /* ProjectService.h */,
 				87D5ABD21A8C7F2900FCD98D /* ProjectService.m */,
+				8761E4D31A90E7130004A3BE /* ZoneService.h */,
+				8761E4D41A90E7130004A3BE /* ZoneService.m */,
+				8761E4D61A90E7230004A3BE /* SubZoneService.h */,
+				8761E4D71A90E7230004A3BE /* SubZoneService.m */,
+				8761E4D91A90E7340004A3BE /* PropertyService.h */,
+				8761E4DA1A90E7340004A3BE /* PropertyService.m */,
+				8761E4DC1A90E74E0004A3BE /* PictureService.h */,
+				8761E4DD1A90E74E0004A3BE /* PictureService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -869,6 +889,7 @@
 				87B4CA8619DD976100550DE5 /* DBTemplates.m in Sources */,
 				87D5ABB51A8BDE2F00FCD98D /* BaseService.m in Sources */,
 				994EAB8318EDBFFE00137F27 /* MainNavContVC.m in Sources */,
+				8761E4D81A90E7230004A3BE /* SubZoneService.m in Sources */,
 				997BBA2119063AA7008A0626 /* HomeMenuVC.m in Sources */,
 				8777D41919CAFA9E0098EC55 /* AUPicture.m in Sources */,
 				8777D43419CC56B30098EC55 /* ZoneReportsVC.m in Sources */,
@@ -888,11 +909,13 @@
 				997BBA2419063BBF008A0626 /* LeveyPopListView.m in Sources */,
 				87B2324519B3AA9400378E49 /* DateHeader.m in Sources */,
 				9912E30B192D43520054358B /* TextView.m in Sources */,
+				8761E4DE1A90E74E0004A3BE /* PictureService.m in Sources */,
 				99F2556818FDAE5200FAB43E /* StoryBoardNavigation.m in Sources */,
 				994EAB7D18EDBE3600137F27 /* HeaderView.m in Sources */,
 				99F2555E18FC85A700FAB43E /* ImageThumbView.m in Sources */,
 				99F2554318F4820500FAB43E /* ProjectVC.m in Sources */,
 				870DC29D19D58D36009498AF /* TypesManager.m in Sources */,
+				8761E4DB1A90E7340004A3BE /* PropertyService.m in Sources */,
 				87B4CA8319DC465900550DE5 /* TemplateChooser.m in Sources */,
 				997BDFE919367F51005002E0 /* AbstractActionSheetPicker.m in Sources */,
 				87B4CA7619DB235700550DE5 /* AUZone.m in Sources */,
@@ -909,6 +932,7 @@
 				994EAB8018EDBF1B00137F27 /* DefaultViewController.m in Sources */,
 				9912E2B119216C640054358B /* TranslationsHomeVC.m in Sources */,
 				87D5ABB41A8BDE2F00FCD98D /* SyncService.m in Sources */,
+				8761E4D51A90E7130004A3BE /* ZoneService.m in Sources */,
 				87D5ABC71A8C7DCB00FCD98D /* DSProperty.m in Sources */,
 				8777D42E19CAFB450098EC55 /* AUTranslation.m in Sources */,
 				997BBA6E1906F716008A0626 /* SubZonesVC.m in Sources */,

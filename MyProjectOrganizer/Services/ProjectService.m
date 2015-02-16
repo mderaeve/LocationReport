@@ -13,8 +13,8 @@
 -(void) syncProject:(DSProject *) p withResultHandler:(SyncProjectsResultBlock) resultHandler
 {
     NSString *serviceName = @"Projects";
-    NSDictionary* pDict = [p toDictionary];
-    [self performPost:serviceName withParameters:pDict withSuccesHandler:^(id result) {
+    NSDictionary* dict = [p toDictionary];
+    [self performPost:serviceName withParameters:dict withSuccesHandler:^(id result) {
         resultHandler(YES,nil);
     } andErrorHandler:^(NSError *error)
      {
