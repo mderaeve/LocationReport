@@ -23,9 +23,9 @@
         withSuccesHandler:(void (^)(id result)) completion
           andErrorHandler:(void (^)(NSError *error))failure;
 
--(void) performDelete:(NSString *)serviceName withParameters:(id) parameters
+/*-(void) performDelete:(NSString *)serviceName withParameters:(id) parameters
     withSuccesHandler:(void (^)(id result)) completion
-      andErrorHandler:(void (^)(NSError *error))failure;
+      andErrorHandler:(void (^)(NSError *error))failure;*/
 
 
 + (NSDateFormatter*)dateFormatter;

@@ -24,7 +24,8 @@
 
 -(NSString *) baseURL
 {
-   return @"https://locationreportapi.azurewebsites.net/api";
+   //return @"https://locationreportapi.azurewebsites.net/api";
+    return @"http://192.168.1.196:187/api";
 }
 
 -(void) performGetRequest:(NSString *)serviceName withParameters:(id) parameters
@@ -37,6 +38,18 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     });
+    
+    NSString * toEncode = [NSString stringWithFormat:@"%@:%@", [VariableStore sharedInstance].userToken, [VariableStore sharedInstance].userPwd];
+    NSString *base64EncodedString = [[toEncode dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
+    
+    NSString * authValue = [NSString stringWithFormat:@"%@ %@",@"USER_TOKEN", base64EncodedString];
+    
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    //AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];
+    
+    manager.requestSerializer = requestSerializer;
     
     [manager GET:serviceName parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -80,6 +93,19 @@
     serviceName = [self encodeURLParts:serviceName];
     
     AFHTTPRequestOperationManager *manager = [self requestOperationManager];
+    
+    NSString * toEncode = [NSString stringWithFormat:@"%@:%@", [VariableStore sharedInstance].userToken, [VariableStore sharedInstance].userPwd];
+    NSString *base64EncodedString = [[toEncode dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0];
+    
+    NSString * authValue = [NSString stringWithFormat:@"%@ %@",@"USER_TOKEN", base64EncodedString];
+    
+    AFJSONRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    //AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];
+
+    manager.requestSerializer = requestSerializer;
+    
     [manager POST:serviceName parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"Success: %@", responseObject);
@@ -102,7 +128,7 @@
           }];
     
 }
-
+/*
 -(void) performDelete:(NSString *) serviceName withParameters:(id) parameters
     withSuccesHandler:(void (^)(id result)) completion
       andErrorHandler:(void (^)(NSError *error))failure {
@@ -132,7 +158,7 @@
                 }
             }];
     
-}
+}*/
 
 -(AFHTTPRequestOperationManager*) requestOperationManager {
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:self.baseURL]];

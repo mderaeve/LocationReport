@@ -45,6 +45,7 @@
 #pragma mark sync
 
 @property (nonatomic, strong) NSString * userToken;
+@property (nonatomic, strong) NSString * userPwd;
 @property (nonatomic, strong) NSDate * lastSyncDate;
 
 @property (nonatomic, strong) NSString * baseURL;

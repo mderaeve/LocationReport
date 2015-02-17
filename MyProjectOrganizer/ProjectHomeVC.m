@@ -54,8 +54,14 @@
     {
         store.userToken = userToken;
     }
+    NSString * userPwd= [defaults objectForKey:userPwdDefaultsKey];
     
-    if (!store.userToken)
+    if (userPwd && ![userPwd isEqualToString:@""])
+    {
+        store.userPwd = userPwd;
+    }
+    
+    if (!store.userToken || !store.userPwd)
     {
         UIAlertController *alertController = [UIAlertController
                                               alertControllerWithTitle:[store Translate:@"Identificatie"]
@@ -66,6 +72,10 @@
          {
              textField.placeholder = [store Translate:@"Usertoken"];
          }];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+         {
+             textField.placeholder = [store Translate:@"¨Password"];
+         }];
         
         //Request a user token
         UIAlertAction *okAction = [UIAlertAction
@@ -75,8 +85,11 @@
                                    {
                                        UITextField *login = alertController.textFields.firstObject;
                                        store.userToken = login.text;
+                                       UITextField *pwd = [alertController.textFields objectAtIndex:1];
+                                       store.userPwd = pwd.text;
                                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                                        [defaults setObject:store.userToken forKey:userTokenDefaultsKey];
+                                       [defaults setObject:store.userPwd forKey:userPwdDefaultsKey];
                                    }];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];

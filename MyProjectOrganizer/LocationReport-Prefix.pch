@@ -16,6 +16,7 @@
 #define kPropertyTypeYesNo @"$PO$YesNo"
 #define kPropertyTypeText @"$PO$Text"
 #define userTokenDefaultsKey @"LocationReportUserToken"
+#define userPwdDefaultsKey @"LocationReportUserPwd"
 
 #define kTemplateType @0
 #define kTemplateFull @1
