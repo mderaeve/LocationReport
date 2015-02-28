@@ -12,7 +12,7 @@
 
 -(void)syncProperty:(DSProperty *)p withResultHandler:(SyncPropertyResultBlock)resultHandler
 {
-    NSString *serviceName = @"Property";
+    NSString *serviceName = @"Properties";
     NSDictionary* dict = [p toDictionary];
     [self performPost:serviceName withParameters:dict withSuccesHandler:^(id result) {
         resultHandler(YES,nil);

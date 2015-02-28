@@ -25,7 +25,7 @@
 -(NSString *) baseURL
 {
    return @"https://locationreportapi.azurewebsites.net/api";
-   // return @"http://192.168.1.10:187/api";
+    //return @"http://192.168.1.10:187/api";
 }
 
 -(void) performGetRequest:(NSString *)serviceName withParameters:(id) parameters
@@ -53,7 +53,7 @@
     
     [manager GET:serviceName parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"Success: %@", responseObject);
+             //NSLog(@"Success: %@", responseObject);
              
              dispatch_async(dispatch_get_main_queue(), ^{
                  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;

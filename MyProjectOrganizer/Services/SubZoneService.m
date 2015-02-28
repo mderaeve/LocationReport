@@ -12,7 +12,7 @@
 
 -(void) syncSubZone:(DSSubZone *)sz withResultHandler:(SyncSubZoneResultBlock)resultHandler
 {
-    NSString *serviceName = @"SubZone";
+    NSString *serviceName = @"SubZones";
     NSDictionary* dict = [sz toDictionary];
     [self performPost:serviceName withParameters:dict withSuccesHandler:^(id result) {
         resultHandler(YES,nil);

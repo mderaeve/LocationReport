@@ -20,11 +20,6 @@
 @property (nonatomic, retain) NSNumber * pic_id;
 @property (nonatomic, retain) NSNumber * proj_id;
 @property (nonatomic, retain) NSString * proj_created_by;
-
-
-
-
-
 @property (nonatomic, retain) NSNumber * prop_id;
 
 

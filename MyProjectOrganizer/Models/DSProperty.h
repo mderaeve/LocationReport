@@ -10,7 +10,7 @@
 
 @interface DSProperty : DSBaseObject
 
-@property (nonatomic, retain) NSString * comp_id;
+@property (nonatomic, retain) NSNumber * comp_id;
 @property (nonatomic, retain) NSNumber * prop_id;
 @property (nonatomic, retain) NSNumber * prop_seq;
 @property (nonatomic, retain) NSString * prop_type;

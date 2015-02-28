@@ -384,6 +384,7 @@
     int seq = [[DBStore GetMaxForEntity:@"AUProperty" AndKeyPath:@"prop_seq" AndFetchDescription:@"maxseqdescr" AndPredicate:[NSString stringWithFormat:@"prop_id = %@", p.prop_id]] intValue] +1   ;
     p.prop_seq = [NSNumber numberWithInt:seq];
     p.prop_created_by = [VariableStore sharedInstance].userToken;
+    p.prop_created = [NSDate date];
     NSError *error;
     if(![[DBStore GetManagedObjectContext] save:&error])
     {

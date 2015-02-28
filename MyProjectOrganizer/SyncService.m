@@ -9,7 +9,9 @@
 #import "SyncService.h"
 #import "MBProgressHUD.h"
 #import "ProjectService.h"
-
+#import "ZoneService.h"
+#import "SubZoneService.h"
+#import "PropertyService.h"
 
 @implementation SyncService
 
@@ -25,13 +27,17 @@
     
     NSArray * projectList = [DBStore GetAllProjects:[NSNumber numberWithInt:0]];
     int i = 0;
-    [self SyncProductWithHud:hud andCounter:i andList:projectList andResultHandler:^(BOOL success, id errorOrNil) {
+    [self SyncProjectWithHud:hud andCounter:i andList:projectList andResultHandler:^(BOOL success, id errorOrNil) {
         if (success)
         {
             [hud hide:YES];
-            NSLog(@"Sync klaar");
+            NSLog(@"Sync Projects Klaar");
+            
         }
     }];
+    
+    
+    
    /* [projectService getAllProjects:^(BOOL success, NSArray *projects, id errorOrNil) {
         for (DSProject * p in projects)
         {
@@ -83,7 +89,7 @@
     */
 }
 
-+(void) SyncProductWithHud:(MBProgressHUD *) hud andCounter:(int) i andList:(NSArray *) projectList andResultHandler:(SyncProjectsResultBlock) resultHandler
++(void) SyncProjectWithHud:(MBProgressHUD *) hud andCounter:(int) i andList:(NSArray *) projectList andResultHandler:(SyncProjectsResultBlock) resultHandler
 {
     if(projectList && projectList.count >i)
     {
@@ -112,16 +118,31 @@
             //Check if its working
             if( success)
             {
-                NSLog(@"Succes");
+                NSLog(@"Succes project sync");
                 hud.labelText = [NSString stringWithFormat:@"Data verstuurd voor project: %@!", project.proj_title];
+                NSArray * zoneList = [DBStore GetAllZones:project.proj_id];
+                int j = 0;
+                [self SyncZoneWithHud:hud andCounter:j andList:zoneList andResultHandler:^(BOOL success, id errorOrNil) {
+                    if (success)
+                    {
+                        [hud hide:YES];
+                        NSLog(@"Sync Zone Klaar");
+                    }
+                }];
+                if (project.prop_id && project.prop_id>0)
+                {
+                    int cnt = 0;
+                    NSArray * propertyList = [DBStore GetAllPropertiesForID:project.prop_id];
+                    [self SyncPropCounter:cnt andList:propertyList];
+                }
             }
             else
             {
-                NSLog(@"Fail");
+                NSLog(@"Fail project sync");
                 hud.labelText = [NSString stringWithFormat:@"Data niet verstuurd voor project: %@!", project.proj_title];
             }
             //zichzelf oproepen als er nog projecten over zijn
-            [self SyncProductWithHud:hud andCounter:i andList:projectList andResultHandler:resultHandler];
+            [self SyncProjectWithHud:hud andCounter:i andList:projectList andResultHandler:resultHandler];
             
         }];
     }
@@ -131,88 +152,155 @@
         resultHandler(YES, nil);
     }
 }
-/*
-+(void) GetProductGroups:(MBProgressHUD *) hud andService:(ProductService *) service
-{
-    hud.labelText = @"Product groepen laden...";
-    hud.progress = 0;
-    [service getAllProductGroups:[NSDate date] withResultHandler:^(BOOL succes, NSArray * result, id errorOrNil)
-     {
-         if (result )
-         {
-             for (DSProductGroups * pg in result)
-             {
-                 if ([pg.productGroupID intValue] > 0  )
-                 {
-                     
-                     ProductGroup * pgInContext = [DBStore GetProductGroupByID:pg.productGroupID];
-                     if (pgInContext)
-                     {
-                         //update
-                         pgInContext.title = pg.title;
-                         pgInContext.timeStamp = [NSDate date];
-                         NSLog(@"existing product group update it to the DB %@", pg.productGroupID);
-                     }
-                     else
-                     {
-                         NSLog(@"new product group add it to the DB %@", pg.productGroupID);
-                         //insert
-                         [DBStore CreateProductGroup:pg.title];
-                     }
-                 }
-                 else
-                 {
-                     NSLog(@"invalid product");
-                 }
-             }
-         }
-         [SyncService GetMoments:hud andService:service];
-         
-     }];
-}*/
 
-/*
-
-+(void) SendMeals:(MBProgressHUD *) hud
++(void) SyncZoneWithHud:(MBProgressHUD *) hud andCounter:(int) j andList:(NSArray *) zoneList andResultHandler:(SyncProjectsResultBlock) resultHandler
 {
-    hud.labelText = @"Maaltijden doorsturen...";
-    NSArray * meals = [DBStore GetChangedMeals];
-    NSMutableArray * mealsToSend = [[NSMutableArray alloc] init];
-    //int counter = 0;
-    for (Meals * m in meals)
+    if(zoneList && zoneList.count >j)
     {
-        DSMeals * mToSend = [[DSMeals alloc] init];
-        mToSend.carbohydrates = m.carbohydrates;
-        mToSend.meal = m.meal;
-        mToSend.mealID = m.mealID;
-        mToSend.moment = m.moment;
-        mToSend.momentID = m.momentID;
-        mToSend.productID = m.productID;
-        mToSend.protein = m.protein;
-        mToSend.timeStamp = m.day;
-        mToSend.quantity = m.quantity;
+        AUZone * zone = [zoneList objectAtIndex:j];
+        ZoneService * zoneService = [[ZoneService alloc] init];
+        hud.labelText = [NSString stringWithFormat:@"Data versturen voor zone: %@.", zone.z_title];
+        DSZone * z = [[DSZone alloc] init];
+        //p.comp_id = store.userToken;
+        z.z_title = zone.z_title;
+        z.z_info = zone.z_info;
+        z.z_created = zone.z_created;
+        z.z_created_by = zone.z_created_by;
+        z.z_date = zone.z_date;
+        z.z_id = zone.z_id;
+        z.proj_id = zone.proj_id;
         
-        [mealsToSend addObject:[mToSend toDictionary]];
-        //[mealsToSend setObject:mToSend forKey:[NSString stringWithFormat:@"%d",counter]];
-        //counter++;
+        z.prop_id = zone.prop_id ? zone.prop_id:[NSNumber numberWithInt:0];
+        z.pic_id = zone.pic_id ? zone.pic_id:[NSNumber numberWithInt:0];
+        
+        z.comp_id = [VariableStore sharedInstance].comp_id;
+        j++;
+        [zoneService syncZone:z withResultHandler:^(BOOL success, id errorOrNil) {
+            //Check if its working
+            if( success)
+            {
+                NSLog(@"Succes zone sync");
+                hud.labelText = [NSString stringWithFormat:@"Data verstuurd voor zone: %@!", zone.z_title];
+                NSArray * subZoneList = [DBStore GetAllSubZones:z.z_id];
+                int k = 0;
+                [self SyncSubZoneWithHud:hud andCounter:k andList:subZoneList andResultHandler:^(BOOL success, id errorOrNil) {
+                    if (success)
+                    {
+                        [hud hide:YES];
+                        NSLog(@"Sync Sub Zone Klaar");
+                    }
+                }];
+                if (zone.prop_id && zone.prop_id>0)
+                {
+                    int cnt = 0;
+                    NSArray * propertyList = [DBStore GetAllPropertiesForID:zone.prop_id];
+                    [self SyncPropCounter:cnt andList:propertyList];
+                }
+            }
+            else
+            {
+                NSLog(@"Sync Zone Fail");
+                hud.labelText = [NSString stringWithFormat:@"Data niet verstuurd voor zone: %@!", zone.z_title];
+            }
+            //zichzelf oproepen als er nog projecten over zijn
+            [self SyncZoneWithHud:hud andCounter:j andList:zoneList andResultHandler:resultHandler];
+            
+        }];
     }
-    
-    //NSDictionary * dictToSend = [NSDictionary dictionaryWithObject:mealsToSend forKey:@"meals"];
-    MealsService * mealsService = [MealsService service];
-    [mealsService insertMeals:mealsToSend withResultHandler:^(BOOL succes, id errorOrNil)
-     {
-         if (succes == YES)
-         {
-             NSLog(@"Succes");
-         }
-         [hud hide:YES];
-     }];
-    
-    
-    if (![VariableStore sharedInstance].lastSyncDate)
+    else
     {
-        [VariableStore sharedInstance].lastSyncDate = [NSDate date];
+        [hud hide:YES];
+        resultHandler(YES, nil);
     }
-}*/
+}
+
++(void) SyncSubZoneWithHud:(MBProgressHUD *) hud andCounter:(int) j andList:(NSArray *) subZoneList andResultHandler:(SyncProjectsResultBlock) resultHandler
+{
+    if(subZoneList && subZoneList.count >j)
+    {
+        AUSubZone * subZone = [subZoneList objectAtIndex:j];
+        SubZoneService * subZoneService = [[SubZoneService alloc] init];
+        hud.labelText = [NSString stringWithFormat:@"Data versturen voor sub zone: %@.", subZone.sz_title];
+        DSSubZone * sz = [[DSSubZone alloc] init];
+        //p.comp_id = store.userToken;
+        sz.sz_title = subZone.sz_title;
+        sz.sz_info = subZone.sz_info;
+        sz.sz_created = subZone.sz_created;
+        sz.sz_created_by = subZone.sz_created_by;
+        sz.sz_date = subZone.sz_date;
+        sz.z_id = subZone.z_id;
+        sz.sz_id = subZone.sz_id;
+        
+        sz.prop_id = subZone.prop_id ? subZone.prop_id:[NSNumber numberWithInt:0];
+        sz.pic_id = subZone.pic_id ? subZone.pic_id:[NSNumber numberWithInt:0];
+        
+        sz.comp_id = [VariableStore sharedInstance].comp_id;
+        j++;
+        [subZoneService syncSubZone:sz withResultHandler:^(BOOL success, id errorOrNil) {
+            //Check if its working
+            if( success)
+            {
+                NSLog(@"Succes sub zone sync");
+                hud.labelText = [NSString stringWithFormat:@"Data verstuurd voor sub zone: %@!", subZone.sz_title];
+                if (subZone.prop_id && subZone.prop_id>0)
+                {
+                    int cnt = 0;
+                    NSArray * propertyList = [DBStore GetAllPropertiesForID:subZone.prop_id];
+                    [self SyncPropCounter:cnt andList:propertyList];
+                }
+            }
+            else
+            {
+                NSLog(@"Fail sub zone sync");
+                hud.labelText = [NSString stringWithFormat:@"Data niet verstuurd voor sub zone: %@!", subZone.sz_title];
+            }
+            //zichzelf oproepen als er nog projecten over zijn
+            [self SyncSubZoneWithHud:hud andCounter:j andList:subZoneList andResultHandler:resultHandler];
+            
+        }];
+    }
+    else
+    {
+        [hud hide:YES];
+        resultHandler(YES, nil);
+    }
+}
+
++(void) SyncPropCounter:(int) cnt andList:(NSArray *) propList
+{
+    if(propList && propList.count >cnt)
+    {
+        AUProperty * prop = [propList objectAtIndex:cnt];
+        PropertyService * propService = [[PropertyService alloc] init];
+        
+        DSProperty * p = [[DSProperty alloc] init];
+        p.prop_created = prop.prop_created;
+        p.prop_created_by = prop.prop_created_by;
+        p.prop_id = prop.prop_id;
+        p.prop_seq = prop.prop_seq;
+        p.prop_title = prop.prop_title;
+        p.prop_type = prop.prop_type;
+        p.prop_value = prop.prop_value;
+        
+        p.comp_id = [VariableStore sharedInstance].comp_id;
+        cnt++;
+        [propService  syncProperty:p withResultHandler:^(BOOL success, id errorOrNil) {
+            //Check if its working
+            if( success)
+            {
+                NSLog(@"Succes prop sync");
+            }
+            else
+            {
+                NSLog(@"Fail prop sync");
+            }
+            //zichzelf oproepen als er nog projecten over zijn
+            [self SyncPropCounter:cnt andList:propList];
+            
+        }];
+    }
+}
+
+
 
 @end
