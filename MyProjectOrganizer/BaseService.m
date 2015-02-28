@@ -24,8 +24,8 @@
 
 -(NSString *) baseURL
 {
-   //return @"https://locationreportapi.azurewebsites.net/api";
-    return @"http://192.168.1.196:187/api";
+   return @"https://locationreportapi.azurewebsites.net/api";
+   // return @"http://192.168.1.10:187/api";
 }
 
 -(void) performGetRequest:(NSString *)serviceName withParameters:(id) parameters
@@ -105,6 +105,7 @@
     [requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];
 
     manager.requestSerializer = requestSerializer;
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     [manager POST:serviceName parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {

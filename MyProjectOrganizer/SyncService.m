@@ -16,57 +16,30 @@
 + (void) SyncProducts:(UIView *) vw
 {
     
-    
-    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:vw animated:YES];
     hud.mode = MBProgressHUDModeText;
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
     hud.labelText = @"Data ophalen en versturen...";
-    VariableStore * store = [VariableStore sharedInstance];
+   // VariableStore * store = [VariableStore sharedInstance];
     //For each product, sub product, property, picture, zone, property, picture, subzone, property, picture.
     
     NSArray * projectList = [DBStore GetAllProjects:[NSNumber numberWithInt:0]];
-    ProjectService * projectService = [[ProjectService alloc] init];
-    
-    /*[projectService getAllProjects:^(BOOL success, NSArray *projects, id errorOrNil) {
+    int i = 0;
+    [self SyncProductWithHud:hud andCounter:i andList:projectList andResultHandler:^(BOOL success, id errorOrNil) {
+        if (success)
+        {
+            [hud hide:YES];
+            NSLog(@"Sync klaar");
+        }
+    }];
+   /* [projectService getAllProjects:^(BOOL success, NSArray *projects, id errorOrNil) {
         for (DSProject * p in projects)
         {
             NSLog(p.proj_title);
         }
     }];*/
      
-    if(projectList && projectList.count >0)
-    {
-        for (AUProject * project in projectList)
-        {
-            DSProject * p = [[DSProject alloc] init];
-            //p.comp_id = store.userToken;
-            p.proj_title = project.proj_title;
-            p.proj_id = project.proj_id;
-            p.proj_info = project.proj_info;
-            
-            p.prop_id = project.prop_id ? project.prop_id:[NSNumber numberWithInt:0];
-            p.pic_id = project.pic_id ? project.pic_id:[NSNumber numberWithInt:0];
-            p.proj_date = project.proj_date;
-            p.proj_isTemplate = project.proj_isTemplate;
-            p.proj_status = project.proj_status;
-            p.proj_templateType = project.proj_templateType ? project.proj_isTemplate:[NSNumber numberWithInt:0];
-            p.proj_templateUsed_id = project.proj_templateUsed_id ? project.proj_templateUsed_id:[NSNumber numberWithInt:0];
-            p.proj_date = project.proj_date;
-            p.proj_created_by = p.proj_created_by ? project.proj_created_by : store.userToken;
-            p.proj_created = project.proj_created;
-            [projectService syncProject:p withResultHandler:^(BOOL success, id errorOrNil) {
-                //Check if its working
-                [hud hide:YES];
-            }];
-            
-            
-        }
-    }
-    else
-    {
-        [hud hide:YES];
-    }
+    
     /*ProductService *service = [ProductService service];
     [service getAllProducts:[NSDate date] withResultHandler:^(BOOL success, NSArray * result, id errorOrNil)
     {
@@ -108,6 +81,55 @@
         [SyncService GetProductGroups:hud andService:service];
     }];
     */
+}
+
++(void) SyncProductWithHud:(MBProgressHUD *) hud andCounter:(int) i andList:(NSArray *) projectList andResultHandler:(SyncProjectsResultBlock) resultHandler
+{
+    if(projectList && projectList.count >i)
+    {
+        AUProject * project = [projectList objectAtIndex:i];
+        ProjectService * projectService = [[ProjectService alloc] init];
+        hud.labelText = [NSString stringWithFormat:@"Data versturen voor project: %@.", project.proj_title];
+        DSProject * p = [[DSProject alloc] init];
+        //p.comp_id = store.userToken;
+        p.proj_title = project.proj_title;
+        p.proj_id = project.proj_id;
+        p.proj_info = project.proj_info;
+        
+        p.prop_id = project.prop_id ? project.prop_id:[NSNumber numberWithInt:0];
+        p.pic_id = project.pic_id ? project.pic_id:[NSNumber numberWithInt:0];
+        
+        p.proj_isTemplate = project.proj_isTemplate;
+        p.proj_status = project.proj_status;
+        // p.proj_templateType = project.proj_templateType ? project.proj_isTemplate:[NSNumber numberWithInt:0];
+        // p.proj_templateUsed_id = project.proj_templateUsed_id ? project.proj_templateUsed_id:[NSNumber numberWithInt:0];
+        p.proj_date = project.proj_date;
+        p.proj_created_by = p.proj_created_by ? project.proj_created_by : [VariableStore sharedInstance].userToken;
+        p.proj_created = project.proj_created;
+        p.comp_id = [VariableStore sharedInstance].comp_id;
+        i++;
+        [projectService syncProject:p withResultHandler:^(BOOL success, id errorOrNil) {
+            //Check if its working
+            if( success)
+            {
+                NSLog(@"Succes");
+                hud.labelText = [NSString stringWithFormat:@"Data verstuurd voor project: %@!", project.proj_title];
+            }
+            else
+            {
+                NSLog(@"Fail");
+                hud.labelText = [NSString stringWithFormat:@"Data niet verstuurd voor project: %@!", project.proj_title];
+            }
+            //zichzelf oproepen als er nog projecten over zijn
+            [self SyncProductWithHud:hud andCounter:i andList:projectList andResultHandler:resultHandler];
+            
+        }];
+    }
+    else
+    {
+        [hud hide:YES];
+        resultHandler(YES, nil);
+    }
 }
 /*
 +(void) GetProductGroups:(MBProgressHUD *) hud andService:(ProductService *) service

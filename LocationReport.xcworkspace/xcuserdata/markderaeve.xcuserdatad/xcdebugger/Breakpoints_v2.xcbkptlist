@@ -57,52 +57,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyProjectOrganizer/SyncService.m"
-            timestampString = "445639799.487769"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "+SyncProducts:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "+[SyncService SyncProducts:]"
-                  moduleName = "LocationReport"
-                  urlString = "file:///Users/markderaeve/Documents/XcodeProjects/Development/DERAEVE/AssistU/LocationReport/MyProjectOrganizer/SyncService.m"
-                  timestampString = "445639903.326524"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "1218">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__28+[SyncService SyncProducts:]_block_invoke_2"
-                  moduleName = "LocationReport"
-                  urlString = "file:///Users/markderaeve/Documents/XcodeProjects/Development/DERAEVE/AssistU/LocationReport/MyProjectOrganizer/SyncService.m"
-                  timestampString = "445639903.326694"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DBStore.m"
             timestampString = "445634793.268388"
             startingColumnNumber = "9223372036854775807"
@@ -116,11 +70,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyProjectOrganizer/Services/ProjectService.m"
-            timestampString = "445637781.449873"
+            timestampString = "446127215.970735"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "17"
@@ -129,13 +83,13 @@
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[ProjectService syncProject:withResultHandler:]"
                   moduleName = "LocationReport"
                   urlString = "file:///Users/markderaeve/Documents/XcodeProjects/Development/DERAEVE/AssistU/LocationReport/MyProjectOrganizer/Services/ProjectService.m"
-                  timestampString = "445639903.328011"
+                  timestampString = "446128021.920786"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -143,13 +97,13 @@
                   offsetFromSymbolStart = "164">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__48-[ProjectService syncProject:withResultHandler:]_block_invoke"
                   moduleName = "LocationReport"
                   urlString = "file:///Users/markderaeve/Documents/XcodeProjects/Development/DERAEVE/AssistU/LocationReport/MyProjectOrganizer/Services/ProjectService.m"
-                  timestampString = "445639903.328154"
+                  timestampString = "446128021.920929"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -157,6 +111,22 @@
                   offsetFromSymbolStart = "40">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyProjectOrganizer/BaseService.m"
+            timestampString = "446133118.949794"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-performPost:withParameters:withSuccesHandler:andErrorHandler:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
