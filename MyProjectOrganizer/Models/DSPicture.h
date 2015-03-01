@@ -10,7 +10,7 @@
 
 @interface DSPicture : DSBaseObject
 
-@property (nonatomic, retain) NSString * comp_id;
+@property (nonatomic, retain) NSNumber * comp_id;
 @property (nonatomic, retain) NSNumber * pic_id;
 @property (nonatomic, retain) NSNumber * pic_seq;
 @property (nonatomic, retain) NSString * pic_url;

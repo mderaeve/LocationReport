@@ -12,7 +12,7 @@
 
 -(void) syncPicture:(DSPicture *)p withResultHandler:(SyncPictureResultBlock)resultHandler
 {
-    NSString *serviceName = @"Picture";
+    NSString *serviceName = @"Pictures";
     NSDictionary* dict = [p toDictionary];
     [self performPost:serviceName withParameters:dict withSuccesHandler:^(id result) {
         resultHandler(YES,nil);

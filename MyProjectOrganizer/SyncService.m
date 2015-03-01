@@ -12,6 +12,7 @@
 #import "ZoneService.h"
 #import "SubZoneService.h"
 #import "PropertyService.h"
+#import "PictureService.h"
 
 @implementation SyncService
 
@@ -135,6 +136,12 @@
                     NSArray * propertyList = [DBStore GetAllPropertiesForID:project.prop_id];
                     [self SyncPropCounter:cnt andList:propertyList];
                 }
+                if (project.pic_id && project.pic_id>0)
+                {
+                    int cnt = 0;
+                    NSArray * picList = [DBStore GetPicturesID:project.pic_id];
+                    [self SyncPicCounter:cnt andList:picList];
+                }
             }
             else
             {
@@ -196,6 +203,12 @@
                     NSArray * propertyList = [DBStore GetAllPropertiesForID:zone.prop_id];
                     [self SyncPropCounter:cnt andList:propertyList];
                 }
+                if (zone.pic_id && zone.pic_id>0)
+                {
+                    int cnt = 0;
+                    NSArray * picList = [DBStore GetPicturesID:zone.pic_id];
+                    [self SyncPicCounter:cnt andList:picList];
+                }
             }
             else
             {
@@ -247,6 +260,12 @@
                     int cnt = 0;
                     NSArray * propertyList = [DBStore GetAllPropertiesForID:subZone.prop_id];
                     [self SyncPropCounter:cnt andList:propertyList];
+                }
+                if (subZone.pic_id && subZone.pic_id>0)
+                {
+                    int cnt = 0;
+                    NSArray * picList = [DBStore GetPicturesID:subZone.pic_id];
+                    [self SyncPicCounter:cnt andList:picList];
                 }
             }
             else
@@ -301,6 +320,37 @@
     }
 }
 
-
++(void) SyncPicCounter:(int) cnt andList:(NSArray *) picList
+{
+    if(picList && picList.count >cnt)
+    {
+        AUPicture * pic = [picList objectAtIndex:cnt];
+        PictureService * picService = [[PictureService alloc] init];
+        
+        DSPicture * p = [[DSPicture alloc] init];
+        p.pic_created = pic.pic_created;
+        p.pic_created_by = pic.pic_created_by;
+        p.pic_id = pic.pic_id;
+        p.pic_seq = pic.pic_seq;
+        p.pic_url = pic.pic_url;
+        
+        p.comp_id = [VariableStore sharedInstance].comp_id;
+        cnt++;
+        [picService  syncPicture:p withResultHandler:^(BOOL success, id errorOrNil) {
+            //Check if its working
+            if( success)
+            {
+                NSLog(@"Succes pic sync");
+            }
+            else
+            {
+                NSLog(@"Fail pic sync");
+            }
+            //zichzelf oproepen als er nog projecten over zijn
+            [self SyncPicCounter:cnt andList:picList];
+            
+        }];
+    }
+}
 
 @end

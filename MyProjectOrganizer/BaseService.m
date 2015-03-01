@@ -109,7 +109,7 @@
     
     [manager POST:serviceName parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"Success: %@", responseObject);
+              //NSLog(@"Success: %@", responseObject);
               
               if([responseObject isKindOfClass:[NSDictionary class]]){
                   completion([NSDictionary dictionaryWithDictionary:(NSDictionary *)responseObject]);
