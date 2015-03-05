@@ -8,7 +8,9 @@
 
 #import "AddPropertyVC.h"
 
-@interface AddPropertyVC ()
+@interface AddPropertyVC () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tblAutocomplete;
 
 @end
 
@@ -17,13 +19,15 @@
     NSArray * types;
     NSString * choice;
     VariableStore * store;
+    NSArray * results;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tblAutocomplete.hidden = YES;
     store   = [VariableStore sharedInstance];
-    types = [NSArray arrayWithObjects:store.sPersonText, store.sYesNoText, store.sTextText, nil];
+    types = [NSArray arrayWithObjects:store.sPersonText, store.sYesNoText, store.sTextText,store.sChoiceText, nil];
     choice = store.sPersonText;
     self.txtTitle.text = [[VariableStore sharedInstance] Translate:@"$PO$Attendent"];
     // Do any additional setup after loading the view from its nib.
@@ -55,6 +59,10 @@
             {
                 self.cbxChoice.selectedSegmentIndex = 2;
             }
+        }
+        else if ([self.property.prop_type isEqualToString:store.sChoiceText])
+        {
+            self.tblAutocomplete.hidden = NO;
         }
         else
         {
@@ -151,6 +159,65 @@
     return types[row];
 }
 
+#pragma mark - UITableViewDelegate / Datasource
+
+#pragma mark UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger) section
+{
+    return results.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+        UITableViewCell *cell = nil;
+        static NSString *autoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
+        cell = [tableView dequeueReusableCellWithIdentifier:autoCompleteRowIdentifier];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc]
+                    initWithStyle:UITableViewCellStyleDefault reuseIdentifier:autoCompleteRowIdentifier];
+        }
+        //cell.textLabel.text = ((AUPropertyTemplate *) [results objectAtIndex:indexPath.row]).;
+    
+        return cell;
+}
+
+// Override to support conditional editing of the table view.
+// This only needs to be implemented if you are going to be returning NO
+// for some items. By default, all items are editable.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+   
+}
+
+// Override to support editing the table view.
+/*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        //add code here for when you hit delete
+        Meals * m = [mealsArray objectAtIndex:indexPath.row];
+        if(store.mealToUpdate==m)
+        {
+            store.mealToUpdate=nil;
+            [self ClearForm];
+        }
+        [DBStore DeleteMeal:m];
+        
+        [self refreshMeals];
+    }
+}
+*/
+#pragma mark UITableViewDelegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    self.tblAutocomplete.hidden = YES;
+    
+}
 
 #pragma mark -
 #pragma mark PickerView Delegate

@@ -24,7 +24,10 @@
         myInstance.sPersonText = [myInstance Translate:kPropertyTypePerson];
         myInstance.sYesNoText = [myInstance Translate:kPropertyTypeYesNo];
         myInstance.sTextText = [myInstance Translate:kPropertyTypeText];
+        myInstance.sChoiceText = [myInstance Translate:kPropertyTypeChoice];
         myInstance.creatingTemplate = NO;
+        myInstance.propPopUpHeight = 544;
+        myInstance.propPopUpWidth = 590;
     }
     return myInstance;
 }

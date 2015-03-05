@@ -12,11 +12,15 @@
 
 #define kOFFSET_FOR_KEYBOARDHOR 352.0
 #define kOFFSET_FOR_KEYBOARDVER 264.0
+
 #define kPropertyTypePerson @"$PO$Person"
 #define kPropertyTypeYesNo @"$PO$YesNo"
 #define kPropertyTypeText @"$PO$Text"
+#define kPropertyTypeChoice @"$PO$Choice"
+
 #define userTokenDefaultsKey @"LocationReportUserToken"
 #define userPwdDefaultsKey @"LocationReportUserPwd"
+
 
 #define kTemplateType @0
 #define kTemplateFull @1

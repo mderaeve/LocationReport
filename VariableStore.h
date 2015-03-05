@@ -37,10 +37,14 @@
 @property (strong, nonatomic) NSString * sPersonText;
 @property (strong, nonatomic) NSString * sYesNoText;
 @property (strong, nonatomic) NSString * sTextText;
+@property (strong, nonatomic) NSString * sChoiceText;
 
 @property (nonatomic, retain) NSArray * POTranslations;
 
 @property (nonatomic) BOOL creatingTemplate;
+
+@property (nonatomic) CGFloat propPopUpWidth;
+@property (nonatomic) CGFloat propPopUpHeight;
 
 #pragma mark sync
 
