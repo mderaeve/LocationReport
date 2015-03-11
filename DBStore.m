@@ -475,6 +475,119 @@
     }
 }
 
+#pragma mark PropertyTemplate
+
++ (NSArray *) GetPropertyTemplateByStartLetters:(NSString *) startLetter andTemplateID:(NSNumber *) temp_id
+{
+    NSError *error;
+    NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription * entDescr = [NSEntityDescription entityForName:@"AUPropertyTemplate" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    [fetchRequest setEntity:entDescr];
+    if (startLetter!=nil && temp_id != nil)
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"prop_title BEGINSWITH[c] %@ and templ_id = %@", startLetter, temp_id];
+        [fetchRequest setPredicate:predicate];
+    }
+    else if (temp_id!=nil && startLetter==nil)
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(templ_id = %@ and prop_title != nil)", temp_id];
+        [fetchRequest setPredicate:predicate];
+    }
+    else if (temp_id==nil && startLetter!=nil)
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"templ_title BEGINSWITH[c] %@ and prop_title = nil", startLetter];
+        [fetchRequest setPredicate:predicate];
+    }
+    else
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"prop_title = nil", startLetter];
+        [fetchRequest setPredicate:predicate];
+    }
+    NSArray * arr = [[DBStore GetManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    if (arr != nil && arr.count>0)
+    {
+        return arr;
+    }
+    //Nothing found
+    return nil;
+}
+
++(AUPropertyTemplate *) GetPropertyTemplateByTemplTitle:(NSString *)templTitle
+{
+    NSError *error;
+    NSFetchRequest * checkForTranslation = [[NSFetchRequest alloc] init];
+    NSEntityDescription * wordEntDescr = [NSEntityDescription entityForName:@"AUPropertyTemplate" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    [checkForTranslation setEntity:wordEntDescr];
+    
+    NSPredicate *predicate;
+    
+    predicate = [NSPredicate predicateWithFormat:@"templ_title = %@",templTitle];
+    
+    [checkForTranslation setPredicate:predicate];
+    NSArray * returnVals = [[DBStore GetManagedObjectContext] executeFetchRequest:checkForTranslation error:&error];
+    
+    AUPropertyTemplate * returnVal = nil;
+    //Word can only exists once.
+    if (returnVals != nil && returnVals.count>0)
+    {
+        //take the first word and add it to the new category of it doens't exists.
+        returnVal = [returnVals objectAtIndex:0];
+    }
+    
+    return returnVal;
+}
+
++(AUPropertyTemplate *) GetPropertyTemplateByPropTitle:(NSString *)propTitle
+{
+    NSError *error;
+    NSFetchRequest * checkForTranslation = [[NSFetchRequest alloc] init];
+    NSEntityDescription * wordEntDescr = [NSEntityDescription entityForName:@"AUPropertyTemplate" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    [checkForTranslation setEntity:wordEntDescr];
+    
+    NSPredicate *predicate;
+    
+    predicate = [NSPredicate predicateWithFormat:@"prop_title = %@",propTitle];
+    
+    [checkForTranslation setPredicate:predicate];
+    NSArray * returnVals = [[DBStore GetManagedObjectContext] executeFetchRequest:checkForTranslation error:&error];
+    
+    AUPropertyTemplate * returnVal = nil;
+    //Word can only exists once.
+    if (returnVals != nil && returnVals.count>0)
+    {
+        //take the first word and add it to the new category of it doens't exists.
+        returnVal = [returnVals objectAtIndex:0];
+    }
+    
+    return returnVal;
+}
+
++ (AUPropertyTemplate *) CreatePropertyTemplate:(NSString *) templ_title AndValue:(NSString *) prop_title AndType:(NSString *) prop_type andTemplateID:(NSNumber *) temp_id
+{
+    AUPropertyTemplate * templ = [NSEntityDescription insertNewObjectForEntityForName:@"AUPropertyTemplate" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    if (temp_id==nil)
+    {
+        templ.templ_id = [DBStore GetIDForEntity:@"AUPropertyTemplate" AndKeyPath:@"templ_id" AndFetchDescription:@"maxtempl_id"];
+    }
+    else
+    {
+        templ.templ_id = temp_id;
+        templ.prop_title = prop_title;
+    }
+    templ.prop_type = prop_type;
+    templ.templ_title = templ_title;
+    
+    return  templ;
+    
+    
+}
+
++(void) DeletePropertyTemplate:(AUPropertyTemplate *)propertyTemplate
+{
+    [[DBStore GetManagedObjectContext] deleteObject:propertyTemplate];
+    [DBStore SaveContext];
+}
+
 #pragma mark Picture
 
 + (AUPicture *)CreatePicture:(NSString *)title AndURL:(NSString *)url AndComment:(NSString *)comment AndPictureID:(NSNumber *) pictureID

@@ -8,7 +8,7 @@
 
 #import "AddPropertyVC.h"
 
-@interface AddPropertyVC () <UITableViewDataSource, UITableViewDelegate>
+@interface AddPropertyVC () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tblAutocomplete;
 
@@ -20,12 +20,20 @@
     NSString * choice;
     VariableStore * store;
     NSArray * results;
+    bool searchTitle;
+    AUPropertyTemplate * selectedProperty;
+    //Get the propertytemplate for the value
+    AUPropertyTemplate * existingTempl;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.tblAutocomplete.hidden = YES;
+    self.tblAutocomplete.delegate = self;
+    self.tblAutocomplete.dataSource = self;
+    
     store   = [VariableStore sharedInstance];
     types = [NSArray arrayWithObjects:store.sPersonText, store.sYesNoText, store.sTextText,store.sChoiceText, nil];
     choice = store.sPersonText;
@@ -39,14 +47,12 @@
     
     if (self.property!=nil)
     {
+        [self SetControlsForChoice:self.property.prop_type];
         self.selTypes.hidden=YES;
         self.txtTitle.text = self.property.prop_title;
         choice = self.property.prop_type;
         if ([self.property.prop_type isEqualToString:store.sYesNoText])
         {
-            self.cbxChoice.hidden=NO;
-            self.txtVal.hidden=YES;
-            self.txtPersonVal.hidden=YES;
             if ([self.property.prop_value isEqualToString:[store Translate:@"$PO$Yes"]])
             {
                 self.cbxChoice.selectedSegmentIndex = 0;
@@ -60,30 +66,120 @@
                 self.cbxChoice.selectedSegmentIndex = 2;
             }
         }
-        else if ([self.property.prop_type isEqualToString:store.sChoiceText])
-        {
-            self.tblAutocomplete.hidden = NO;
-        }
         else
         {
-            self.cbxChoice.hidden=YES;
+            [self.txtVal isFirstResponder];
             if ([self.property.prop_type isEqualToString:[VariableStore sharedInstance].sPersonText])
             {
                 self.txtPersonVal.text = self.property.prop_value;
-                self.txtPersonVal.hidden=NO;
-                self.txtVal.hidden=YES;
+                [self.txtPersonVal isFirstResponder];
             }
             else if ([self.property.prop_type isEqualToString:[VariableStore sharedInstance].sTextText])
             {
                 self.txtVal.text = self.property.prop_value;
-                self.txtPersonVal.hidden=YES;
-                self.txtVal.hidden=NO;
             }
         }
         
     }
-    [self.txtVal isFirstResponder];
 }
+
+
+#pragma mark Autocomplete
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    
+    if (textField == self.txtTitle)
+    {
+        searchTitle=YES;
+        
+        self.tblAutocomplete.hidden = NO;
+        [self searchAutocompleteEntriesWithSubstring:self.txtTitle.text];
+        
+    }
+    else if (textField == self.txtVal)
+    {
+        searchTitle=NO;
+        if (existingTempl==nil)
+        {
+            existingTempl = [DBStore GetPropertyTemplateByTemplTitle:self.txtTitle.text];
+        }
+        self.tblAutocomplete.hidden = NO;
+        [self searchAutocompleteEntriesWithSubstring:self.txtVal.text];
+        
+    }
+    return YES;
+    
+}
+
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if (textField==self.txtVal)
+    {
+        self.tblAutocomplete.hidden = YES;
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.txtTitle || textField == self.txtVal)
+    {
+        if (results.count==1)
+        {
+             selectedProperty =  ((AUPropertyTemplate *) [results objectAtIndex:0]);
+            if (searchTitle==YES)
+            {
+                self.txtTitle.text = selectedProperty.templ_title;
+           
+            }
+            else
+            {
+                self.txtVal.text = selectedProperty.prop_title;
+                
+            }
+            self.tblAutocomplete.hidden = YES;
+        }
+    }
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.txtTitle)
+    {
+        searchTitle=YES;
+    }
+    else
+    {
+        searchTitle=NO;
+    }
+    
+    self.tblAutocomplete.hidden = NO;
+    
+    NSString *substring = [NSString stringWithString:textField.text];
+    substring = [substring
+                 stringByReplacingCharactersInRange:range withString:string];
+    [self searchAutocompleteEntriesWithSubstring:substring];
+    return YES;
+}
+
+- (void)searchAutocompleteEntriesWithSubstring:(NSString *)substring {
+    
+    // Put anything that starts with this substring into the autocompleteUrls array
+    // The items in this array is what will show up in the table view
+    if (searchTitle==YES)
+    {
+        results = [DBStore GetPropertyTemplateByStartLetters:substring andTemplateID:nil];
+    }
+    else
+    {
+        results = [DBStore GetPropertyTemplateByStartLetters:substring andTemplateID:existingTempl.templ_id];
+    }
+    [self.tblAutocomplete reloadData];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -117,11 +213,41 @@
         //Save
         value = self.txtVal.text;
     }
+    else if ([choice isEqualToString:store.sChoiceText])
+    {
+        value = self.txtVal.text;
+    }
     title = self.txtTitle.text;
     
     if (self.property==nil)
     {
         AUProperty * prop = [DBStore CreateProperty:title AndValue:value AndType:choice  AndPropertyID:self.propID];
+        if ([choice isEqualToString:store.sChoiceText])
+        {
+            //if the template already exists for property, do nothing, else create the template
+            //value = template_title, prop_title = prop.title and prop.
+            // prop_type;
+            // prop_title;
+            // prop_default_value;
+            // NSNumber * templ_id;
+            // templ_title;
+            //Kijken als de gekozen templ title bestaat, zoniet inserten
+            AUPropertyTemplate * existingProp;
+            
+            existingTempl = [DBStore GetPropertyTemplateByTemplTitle:title];
+            
+            //Dan kijken al de gekozen val bestaat, zoniet, insert en koppelen aan de templ
+            if (existingTempl==nil)
+            {
+                existingTempl = [DBStore CreatePropertyTemplate:title AndValue:nil AndType:choice andTemplateID:nil];
+            }
+            existingProp = [DBStore GetPropertyTemplateByPropTitle:value];
+            if (existingProp==nil)
+            {
+                [DBStore CreatePropertyTemplate:existingTempl.templ_title AndValue:value AndType:choice andTemplateID:existingTempl.templ_id];
+            }
+        }
+        [DBStore SaveContext];
         if ([self.delegate respondsToSelector:@selector(PropertyAdded:)])
         {
             [self.delegate PropertyAdded:prop];
@@ -171,16 +297,23 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-        UITableViewCell *cell = nil;
-        static NSString *autoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
-        cell = [tableView dequeueReusableCellWithIdentifier:autoCompleteRowIdentifier];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc]
-                    initWithStyle:UITableViewCellStyleDefault reuseIdentifier:autoCompleteRowIdentifier];
-        }
-        //cell.textLabel.text = ((AUPropertyTemplate *) [results objectAtIndex:indexPath.row]).;
+    UITableViewCell *cell = nil;
+    static NSString *autoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
+    cell = [tableView dequeueReusableCellWithIdentifier:autoCompleteRowIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier:autoCompleteRowIdentifier];
+    }
+    if (searchTitle==YES)
+    {
+        cell.textLabel.text = ((AUPropertyTemplate *) [results objectAtIndex:indexPath.row]).templ_title;
+    }
+    else
+    {
+        cell.textLabel.text = ((AUPropertyTemplate *) [results objectAtIndex:indexPath.row]).prop_title;
+    }
     
-        return cell;
+    return cell;
 }
 
 // Override to support conditional editing of the table view.
@@ -193,30 +326,37 @@
 }
 
 // Override to support editing the table view.
-/*- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        //add code here for when you hit delete
-        Meals * m = [mealsArray objectAtIndex:indexPath.row];
-        if(store.mealToUpdate==m)
+        AUPropertyTemplate * pt = [results objectAtIndex:indexPath.row];
+        [DBStore DeletePropertyTemplate:pt];
+        if (searchTitle)
         {
-            store.mealToUpdate=nil;
-            [self ClearForm];
+            [self searchAutocompleteEntriesWithSubstring:self.txtTitle.text];
         }
-        [DBStore DeleteMeal:m];
-        
-        [self refreshMeals];
+        else
+        {
+            [self searchAutocompleteEntriesWithSubstring:self.txtVal.text];
+        }
     }
 }
-*/
+
 #pragma mark UITableViewDelegate methods
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+    selectedProperty = [results objectAtIndex:indexPath.row];
+    if (searchTitle)
+    {
+        self.txtTitle.text = selectedProperty.templ_title;
+    }
+    else
+    {
+        self.txtVal.text = selectedProperty.prop_title;
+    }
     self.tblAutocomplete.hidden = YES;
-    
 }
 
 #pragma mark -
@@ -226,16 +366,31 @@
 {
     self.txtTitle.text = @"";
     choice = types[row];
+    [self SetControlsForChoice:choice];
     //show the corresponding control
-    if ([choice isEqualToString:store.sYesNoText])
+    
+}
+
+-(void) SetControlsForChoice:(NSString *) typeChoice
+{
+    if ([typeChoice isEqualToString:store.sYesNoText])
     {
         self.cbxChoice.hidden=NO;
         self.txtVal.hidden=YES;
         self.txtPersonVal.hidden=YES;
     }
+    else if ([typeChoice isEqualToString:store.sChoiceText])
+    {
+        self.cbxChoice.hidden=YES;
+        self.tblAutocomplete.hidden = NO;
+        self.txtVal.hidden=NO;
+        self.txtTitle.delegate = self;
+        self.txtVal.delegate = self;
+        self.txtPersonVal.hidden=YES;
+    }
     else
     {
-        if ([choice isEqualToString:store.sPersonText])
+        if ([typeChoice isEqualToString:store.sPersonText])
         {
             self.txtTitle.text = [[VariableStore sharedInstance] Translate:@"$PO$Attendent"];
             self.txtVal.hidden=YES;
@@ -246,7 +401,7 @@
             self.txtVal.hidden=NO;
             self.txtPersonVal.hidden=YES;
         }
-       
+        
         self.cbxChoice.hidden=YES;
     }
 }

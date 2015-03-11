@@ -73,6 +73,20 @@
 
 +(void) DeleteProperty:(AUProperty *) property;
 
++ GetPropertyByStartLetters:(NSString *) letters andType:(NSString *) prop_type;
+
+#pragma mark PropertyTemplate
+
++ (NSArray *) GetPropertyTemplateByStartLetters:(NSString *) letters andTemplateID:(NSNumber *) temp_id;
+
++ (AUPropertyTemplate *) GetPropertyTemplateByTemplTitle:(NSString *) templTitle;
+
++ (AUPropertyTemplate *) GetPropertyTemplateByPropTitle:(NSString *) propTitle;
+
++ (AUPropertyTemplate *) CreatePropertyTemplate:(NSString *) templ_title AndValue:(NSString *) prop_title AndType:(NSString *) prop_type andTemplateID:(NSNumber *) temp_id;
+
++(void) DeletePropertyTemplate:(AUPropertyTemplate *) propertyTemplate;
+
 #pragma mark Pictures
 
 + (AUPicture *) CreatePicture:(NSString *)title AndURL:(NSString *) url AndComment:(NSString *) comment AndPictureID:(NSNumber *) pictureID;

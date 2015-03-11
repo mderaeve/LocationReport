@@ -473,7 +473,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         addPropVC.property = prop;
         self.popoverController = [[UIPopoverController alloc] initWithContentViewController:addPropVC];
         
-        self.popoverController.popoverContentSize = CGSizeMake(590, 400); //or whatever size you need
+        self.popoverController.popoverContentSize = CGSizeMake(store.propPopUpWidth, store.propPopUpHeight); //or whatever size you need
         addPropVC.delegate = self;
         //this will present the view controller from the sender's frame, assuming this code is used inside an IBAction
         //and the popover's arrow will point down
