@@ -95,6 +95,8 @@
 
 + (void) DeletePicture:(AUPicture *) pic;
 
++(NSArray *) GetAllPictures;
+
 #pragma mark Translations`
 
 + (NSArray *) GetTranslationsForLanguage:(NSString *) language;

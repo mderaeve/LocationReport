@@ -483,17 +483,17 @@
     NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription * entDescr = [NSEntityDescription entityForName:@"AUPropertyTemplate" inManagedObjectContext:[DBStore GetManagedObjectContext]];
     [fetchRequest setEntity:entDescr];
-    if (startLetter!=nil && temp_id != nil)
+    if (startLetter!=nil && ![startLetter isEqualToString:@""] && temp_id != nil)
     {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"prop_title BEGINSWITH[c] %@ and templ_id = %@", startLetter, temp_id];
         [fetchRequest setPredicate:predicate];
     }
-    else if (temp_id!=nil && startLetter==nil)
+    else if (temp_id!=nil && (startLetter==nil || [startLetter isEqualToString:@""]))
     {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(templ_id = %@ and prop_title != nil)", temp_id];
         [fetchRequest setPredicate:predicate];
     }
-    else if (temp_id==nil && startLetter!=nil)
+    else if (temp_id==nil && startLetter!=nil && ![startLetter isEqualToString:@""])
     {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"templ_title BEGINSWITH[c] %@ and prop_title = nil", startLetter];
         [fetchRequest setPredicate:predicate];
@@ -629,6 +629,18 @@
     NSArray * dataArray = [[DBStore GetManagedObjectContext] executeFetchRequest:getData error:&error];
     return dataArray;
 }
+
++(NSArray *) GetAllPictures
+{
+    NSError *error;
+    NSFetchRequest * getData = [[NSFetchRequest alloc] init];
+    NSEntityDescription * entDescr = [NSEntityDescription entityForName:@"AUPicture" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    [getData setEntity:entDescr];
+    
+    NSArray * dataArray = [[DBStore GetManagedObjectContext] executeFetchRequest:getData error:&error];
+    return dataArray;
+}
+
 
 + (void) DeletePicture:(AUPicture *) pic
 {

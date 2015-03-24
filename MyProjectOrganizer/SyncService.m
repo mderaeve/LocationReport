@@ -6,15 +6,30 @@
 //  Copyright (c) 2014 AssistU. All rights reserved.
 //
 
+#import <AssetsLibrary/AssetsLibrary.h>
 #import "SyncService.h"
 #import "MBProgressHUD.h"
 #import "ProjectService.h"
 #import "ZoneService.h"
 #import "SubZoneService.h"
 #import "PropertyService.h"
+#import "Uploader.h"
 #import "PictureService.h"
 
+@interface SyncService () <UploaderEvents>
+
+@end
+
 @implementation SyncService
+{
+    Uploader * uploader;
+    ALAssetsLibrary* assetslibrary;
+    NSArray * allPictures;
+    int picIndex;
+    MBProgressHUD *hud;
+}
+
+#pragma mark products
 
 + (void) SyncProducts:(UIView *) vw
 {
@@ -22,7 +37,7 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:vw animated:YES];
     hud.mode = MBProgressHUDModeText;
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Data ophalen en versturen...";
+    hud.labelText = @"Load and send data...";
    // VariableStore * store = [VariableStore sharedInstance];
     //For each product, sub product, property, picture, zone, property, picture, subzone, property, picture.
     
@@ -32,62 +47,11 @@
         if (success)
         {
             [hud hide:YES];
-            NSLog(@"Sync Projects Klaar");
+            NSLog(@"Sync Projects Ready");
             
         }
     }];
     
-    
-    
-   /* [projectService getAllProjects:^(BOOL success, NSArray *projects, id errorOrNil) {
-        for (DSProject * p in projects)
-        {
-            NSLog(p.proj_title);
-        }
-    }];*/
-     
-    
-    /*ProductService *service = [ProductService service];
-    [service getAllProducts:[NSDate date] withResultHandler:^(BOOL success, NSArray * result, id errorOrNil)
-    {
-        if (result)
-        {
-            hud.labelText = @"Producten laden...";
-
-            for (DSProduct * p in result)
-            {
-                if ([p.productID intValue] > 0  )
-                {
-                    
-                    Product * pInContext = [DBStore GetProductByID:p.productID];
-                    if (pInContext)
-                    {
-                        NSLog(@"existing product update it to the DB %@", p.productID);
-                        //update
-                        pInContext.carbohydrates   = p.carbohydrates;
-                        pInContext.energy = p.energy;
-                        pInContext.productGroupID = p.productGroupID;
-                        pInContext.protein = p.protein;
-                        pInContext.sugar = p.sugar;
-                        pInContext.title = p.title;
-                        pInContext.timeStamp = [NSDate date];
-                    }
-                    else
-                    {
-                        NSLog(@"new product add it to the DB %@", p.productID);
-                        //insert
-                        [DBStore CreateProduct:p.title andProductGroupID:p.productGroupID AndProtein:p.protein AndCarbonHydrates:p.carbohydrates AndEnergy:p.energy AndSugar:p.sugar];
-                    }
-                }
-                else
-                {
-                    NSLog(@"invalid product");
-                }
-            }
-        }
-        [SyncService GetProductGroups:hud andService:service];
-    }];
-    */
 }
 
 +(void) SyncProjectWithHud:(MBProgressHUD *) hud andCounter:(int) i andList:(NSArray *) projectList andResultHandler:(SyncProjectsResultBlock) resultHandler
@@ -96,7 +60,7 @@
     {
         AUProject * project = [projectList objectAtIndex:i];
         ProjectService * projectService = [[ProjectService alloc] init];
-        hud.labelText = [NSString stringWithFormat:@"Data versturen voor project: %@.", project.proj_title];
+        hud.labelText = [NSString stringWithFormat:@"Send data for project: %@.", project.proj_title];
         DSProject * p = [[DSProject alloc] init];
         //p.comp_id = store.userToken;
         p.proj_title = project.proj_title;
@@ -120,14 +84,14 @@
             if( success)
             {
                 NSLog(@"Succes project sync");
-                hud.labelText = [NSString stringWithFormat:@"Data verstuurd voor project: %@!", project.proj_title];
+                hud.labelText = [NSString stringWithFormat:@"Data send for project: %@!", project.proj_title];
                 NSArray * zoneList = [DBStore GetAllZones:project.proj_id];
                 int j = 0;
                 [self SyncZoneWithHud:hud andCounter:j andList:zoneList andResultHandler:^(BOOL success, id errorOrNil) {
                     if (success)
                     {
                         [hud hide:YES];
-                        NSLog(@"Sync Zone Klaar");
+                        NSLog(@"Sync Zone Ready");
                     }
                 }];
                 if (project.prop_id && project.prop_id>0)
@@ -146,7 +110,7 @@
             else
             {
                 NSLog(@"Fail project sync");
-                hud.labelText = [NSString stringWithFormat:@"Data niet verstuurd voor project: %@!", project.proj_title];
+                hud.labelText = [NSString stringWithFormat:@"Data not send for project: %@!", project.proj_title];
             }
             //zichzelf oproepen als er nog projecten over zijn
             [self SyncProjectWithHud:hud andCounter:i andList:projectList andResultHandler:resultHandler];
@@ -166,7 +130,7 @@
     {
         AUZone * zone = [zoneList objectAtIndex:j];
         ZoneService * zoneService = [[ZoneService alloc] init];
-        hud.labelText = [NSString stringWithFormat:@"Data versturen voor zone: %@.", zone.z_title];
+        hud.labelText = [NSString stringWithFormat:@"Data send for zone: %@.", zone.z_title];
         DSZone * z = [[DSZone alloc] init];
         //p.comp_id = store.userToken;
         z.z_title = zone.z_title;
@@ -187,14 +151,14 @@
             if( success)
             {
                 NSLog(@"Succes zone sync");
-                hud.labelText = [NSString stringWithFormat:@"Data verstuurd voor zone: %@!", zone.z_title];
+                hud.labelText = [NSString stringWithFormat:@"Data send for zone: %@!", zone.z_title];
                 NSArray * subZoneList = [DBStore GetAllSubZones:z.z_id];
                 int k = 0;
                 [self SyncSubZoneWithHud:hud andCounter:k andList:subZoneList andResultHandler:^(BOOL success, id errorOrNil) {
                     if (success)
                     {
                         [hud hide:YES];
-                        NSLog(@"Sync Sub Zone Klaar");
+                        NSLog(@"Sync Sub Zone Ready");
                     }
                 }];
                 if (zone.prop_id && zone.prop_id>0)
@@ -213,7 +177,7 @@
             else
             {
                 NSLog(@"Sync Zone Fail");
-                hud.labelText = [NSString stringWithFormat:@"Data niet verstuurd voor zone: %@!", zone.z_title];
+                hud.labelText = [NSString stringWithFormat:@"Data not send for zone: %@!", zone.z_title];
             }
             //zichzelf oproepen als er nog projecten over zijn
             [self SyncZoneWithHud:hud andCounter:j andList:zoneList andResultHandler:resultHandler];
@@ -233,7 +197,7 @@
     {
         AUSubZone * subZone = [subZoneList objectAtIndex:j];
         SubZoneService * subZoneService = [[SubZoneService alloc] init];
-        hud.labelText = [NSString stringWithFormat:@"Data versturen voor sub zone: %@.", subZone.sz_title];
+        hud.labelText = [NSString stringWithFormat:@"Data send for sub zone: %@.", subZone.sz_title];
         DSSubZone * sz = [[DSSubZone alloc] init];
         //p.comp_id = store.userToken;
         sz.sz_title = subZone.sz_title;
@@ -254,7 +218,7 @@
             if( success)
             {
                 NSLog(@"Succes sub zone sync");
-                hud.labelText = [NSString stringWithFormat:@"Data verstuurd voor sub zone: %@!", subZone.sz_title];
+                hud.labelText = [NSString stringWithFormat:@"Data send for sub zone: %@!", subZone.sz_title];
                 if (subZone.prop_id && subZone.prop_id>0)
                 {
                     int cnt = 0;
@@ -271,7 +235,7 @@
             else
             {
                 NSLog(@"Fail sub zone sync");
-                hud.labelText = [NSString stringWithFormat:@"Data niet verstuurd voor sub zone: %@!", subZone.sz_title];
+                hud.labelText = [NSString stringWithFormat:@"Data not send for sub zone: %@!", subZone.sz_title];
             }
             //zichzelf oproepen als er nog projecten over zijn
             [self SyncSubZoneWithHud:hud andCounter:j andList:subZoneList andResultHandler:resultHandler];
@@ -352,5 +316,116 @@
         }];
     }
 }
+
+#pragma mark Pictures
+
+-(void) SyncPictures:(UIView *) vw
+{
+    if (!hud)
+    {
+        hud = [MBProgressHUD showHUDAddedTo:vw animated:YES];
+    }
+    hud.mode = MBProgressHUDModeText;
+    //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    hud.labelText = @"Send pictures...";
+
+    allPictures = [DBStore GetAllPictures];
+    uploader = [[Uploader alloc] init];
+    uploader.delegate = self;
+    assetslibrary = [[ALAssetsLibrary alloc] init];
+    picIndex=0;
+    [self continueUploadPictures];
+}
+
+-(void) continueUploadPictures
+{
+    if (allPictures && allPictures.count > picIndex)
+    {
+        //for (AUPicture * pic in allPictures)
+        //{
+        [self uploadImage:((AUPicture *)[allPictures objectAtIndex:picIndex]).pic_url andToPath:[NSString stringWithFormat:@"%@-%@",((AUPicture *)[allPictures objectAtIndex:picIndex]).pic_id, ((AUPicture *)[allPictures objectAtIndex:picIndex]).pic_seq]];
+        //}
+    }
+    else
+    {
+        [hud hide:YES];
+    }
+}
+
+-(void) uploadImage:(NSString *) url andToPath:(NSString *) subPath
+{
+    
+    typedef void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *asset);
+    typedef void (^ALAssetsLibraryAccessFailureBlock)(NSError *error);
+    
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+    {
+        hud.detailsLabelText = [NSString stringWithFormat:@"Sending picture:%@", subPath];
+        ALAssetRepresentation *rep = [myasset defaultRepresentation];
+        CGImageRef iref = [rep fullResolutionImage];
+        UIImage *im;
+        if (iref) {
+            im = [UIImage imageWithCGImage:iref scale:[rep scale] orientation:(UIImageOrientation)[rep orientation]];
+             [uploader sendAction:im andSubPath:subPath];
+        }
+        else {
+            //Something is wrong with the rep
+            //[MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        }
+    };
+    
+    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+    {
+        NSLog(@"can't get image");
+        //Remove the image from the local store.
+        hud.detailsLabelText = [NSString stringWithFormat:@"Could not find image:%@ deleted from DB", subPath];
+        [DBStore DeletePicture:(AUPicture *)[allPictures objectAtIndex:picIndex]];
+    };
+    
+    if (url && ![url isEqualToString:@""]) {
+        NSURL *asseturl = [NSURL URLWithString:url];
+        
+        //ALAssetsLibrary *assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:asseturl
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
+    }
+   
+}
+
+-(void) sendDidStopWithStatus:(NSString *)statusString
+{
+    
+    if ([statusString isEqualToString:@"Put succeeded"])
+    {
+       //OK
+        picIndex = picIndex +1;
+        [self continueUploadPictures];
+         hud.detailsLabelText = @"Send ok!";
+    }
+    else
+    {
+        //hud.labelText = statusString;
+        hud.detailsLabelText = statusString;
+    }
+    
+}
+
+-(void)sendDidStart:(NSString *)url
+{
+    /*if (url.length > 20)
+    {
+        hud.labelText = [url substringFromIndex:(url.length - 20)];
+    }*/
+}
+
+-(void) updateStatus:(NSString *)statusString
+{
+   // hud.labelText = statusString;
+}
+
+
+
+
 
 @end

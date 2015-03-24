@@ -54,4 +54,10 @@
 
 @property (nonatomic, strong) NSString * baseURL;
 
+#pragma mark FTP
+
+@property (nonatomic, strong) NSString * ftpPath;
+@property (nonatomic, strong)  NSString * ftpUser;
+@property (nonatomic, strong)  NSString * ftpPwd;
+
 @end

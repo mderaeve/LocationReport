@@ -36,6 +36,9 @@
 		87B4CA8619DD976100550DE5 /* DBTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA8519DD976100550DE5 /* DBTemplates.m */; };
 		87B56B7A19C8C7A70050A37B /* AddPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B56B7819C8C7A70050A37B /* AddPropertyVC.m */; };
 		87B56B7B19C8C7A70050A37B /* AddPropertyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87B56B7919C8C7A70050A37B /* AddPropertyVC.xib */; };
+		87CEDEDA1AB8B6B8004B1598 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEDED71AB8B6B8004B1598 /* NetworkManager.m */; };
+		87CEDEDB1AB8B6B8004B1598 /* Uploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87CEDED91AB8B6B8004B1598 /* Uploader.m */; };
+		87CEDEDE1AB8BA67004B1598 /* movie.png in Resources */ = {isa = PBXBuildFile; fileRef = 87CEDEDD1AB8BA67004B1598 /* movie.png */; };
 		87D5ABB41A8BDE2F00FCD98D /* SyncService.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABB11A8BDE2F00FCD98D /* SyncService.m */; };
 		87D5ABB51A8BDE2F00FCD98D /* BaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABB31A8BDE2F00FCD98D /* BaseService.m */; };
 		87D5ABB81A8BDEFD00FCD98D /* PropertyUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABB71A8BDEFD00FCD98D /* PropertyUtil.m */; };
@@ -164,6 +167,11 @@
 		87B56B7719C8C7A70050A37B /* AddPropertyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPropertyVC.h; sourceTree = "<group>"; };
 		87B56B7819C8C7A70050A37B /* AddPropertyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPropertyVC.m; sourceTree = "<group>"; };
 		87B56B7919C8C7A70050A37B /* AddPropertyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPropertyVC.xib; sourceTree = "<group>"; };
+		87CEDED61AB8B6B8004B1598 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		87CEDED71AB8B6B8004B1598 /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		87CEDED81AB8B6B8004B1598 /* Uploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Uploader.h; sourceTree = "<group>"; };
+		87CEDED91AB8B6B8004B1598 /* Uploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Uploader.m; sourceTree = "<group>"; };
+		87CEDEDD1AB8BA67004B1598 /* movie.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movie.png; sourceTree = "<group>"; };
 		87D5ABB01A8BDE2F00FCD98D /* SyncService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncService.h; sourceTree = "<group>"; };
 		87D5ABB11A8BDE2F00FCD98D /* SyncService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncService.m; sourceTree = "<group>"; };
 		87D5ABB21A8BDE2F00FCD98D /* BaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseService.h; sourceTree = "<group>"; };
@@ -354,9 +362,21 @@
 			name = Template;
 			sourceTree = "<group>";
 		};
+		87CEDEDC1AB8B6BD004B1598 /* FTP */ = {
+			isa = PBXGroup;
+			children = (
+				87CEDED61AB8B6B8004B1598 /* NetworkManager.h */,
+				87CEDED71AB8B6B8004B1598 /* NetworkManager.m */,
+				87CEDED81AB8B6B8004B1598 /* Uploader.h */,
+				87CEDED91AB8B6B8004B1598 /* Uploader.m */,
+			);
+			name = FTP;
+			sourceTree = "<group>";
+		};
 		87D5ABAF1A8BDE0600FCD98D /* Sync */ = {
 			isa = PBXGroup;
 			children = (
+				87CEDEDC1AB8B6BD004B1598 /* FTP */,
 				87D5ABBB1A8BDF2400FCD98D /* Models */,
 				87D5ABB91A8BDF0300FCD98D /* Util */,
 				87D5ABBA1A8BDF1000FCD98D /* Services */,
@@ -700,6 +720,7 @@
 		99F2556118FDABCE00FAB43E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				87CEDEDD1AB8BA67004B1598 /* movie.png */,
 				870DC29719D587B3009498AF /* pencil.png */,
 				87DDA02119C2EBC8004A3152 /* download.png */,
 				87DDA01919C1925E004A3152 /* edit.png */,
@@ -776,7 +797,7 @@
 				ORGANIZATIONNAME = AssistU;
 				TargetAttributes = {
 					994EAB1618EB163400137F27 = {
-						DevelopmentTeam = BSLG65GAWX;
+						DevelopmentTeam = U9DEGUKT7W;
 					};
 				};
 			};
@@ -813,6 +834,7 @@
 				994EAB2E18EB163400137F27 /* Main_iPhone.storyboard in Resources */,
 				997BE01A19406D01005002E0 /* upcloud@2x.png in Resources */,
 				87B4CA7C19DB24F200550DE5 /* TemplatesStoryboard.storyboard in Resources */,
+				87CEDEDE1AB8BA67004B1598 /* movie.png in Resources */,
 				87DDA01A19C1925E004A3152 /* edit.png in Resources */,
 				997BE01C19410DE7005002E0 /* list.png in Resources */,
 				870DC29E19D58D36009498AF /* TypesManager.xib in Resources */,
@@ -888,6 +910,7 @@
 				99CFCBE9190E67A30066EF1F /* PropertiesVC.m in Sources */,
 				87B4CA8619DD976100550DE5 /* DBTemplates.m in Sources */,
 				87D5ABB51A8BDE2F00FCD98D /* BaseService.m in Sources */,
+				87CEDEDA1AB8B6B8004B1598 /* NetworkManager.m in Sources */,
 				994EAB8318EDBFFE00137F27 /* MainNavContVC.m in Sources */,
 				8761E4D81A90E7230004A3BE /* SubZoneService.m in Sources */,
 				997BBA2119063AA7008A0626 /* HomeMenuVC.m in Sources */,
@@ -931,6 +954,7 @@
 				994EAB5C18EC344E00137F27 /* VariableStore.m in Sources */,
 				994EAB8018EDBF1B00137F27 /* DefaultViewController.m in Sources */,
 				9912E2B119216C640054358B /* TranslationsHomeVC.m in Sources */,
+				87CEDEDB1AB8B6B8004B1598 /* Uploader.m in Sources */,
 				87D5ABB41A8BDE2F00FCD98D /* SyncService.m in Sources */,
 				8761E4D51A90E7130004A3BE /* ZoneService.m in Sources */,
 				87D5ABC71A8C7DCB00FCD98D /* DSProperty.m in Sources */,
@@ -1063,6 +1087,7 @@
 				INFOPLIST_FILE = "MyProjectOrganizer/LocationReport-Info.plist";
 				PRODUCT_NAME = LocationReport;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1080,6 +1105,7 @@
 				INFOPLIST_FILE = "MyProjectOrganizer/LocationReport-Info.plist";
 				PRODUCT_NAME = LocationReport;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -13,4 +13,6 @@
 
 + (void) SyncProducts:(UIView *) vw;
 
+- (void) SyncPictures:(UIView *) vw;
+
 @end

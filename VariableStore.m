@@ -28,6 +28,9 @@
         myInstance.creatingTemplate = NO;
         myInstance.propPopUpHeight = 544;
         myInstance.propPopUpWidth = 590;
+        myInstance.ftpPath = @"ftp://173.248.142.19/dailycode.info/data";
+        myInstance.ftpUser = @"dailycod";
+        myInstance.ftpPwd = @"Aardvarken1";
     }
     return myInstance;
 }

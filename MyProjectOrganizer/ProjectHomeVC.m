@@ -103,6 +103,12 @@
     [SyncService SyncProducts:self.view];
 }
 
+- (IBAction)btnSyncPictures:(id)sender
+{
+    SyncService* syncPicturesService = [[SyncService alloc] init];
+    [syncPicturesService SyncPictures:self.view];
+}
+
 - (IBAction)selSortChanged:(id)sender
 {
     [self getAllProjects];
@@ -351,6 +357,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation
