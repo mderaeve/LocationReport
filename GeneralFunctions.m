@@ -11,6 +11,55 @@
 
 @implementation GeneralFunctions
 
++(void) showUserToken:(UIViewController * ) vc
+{
+    VariableStore * store = [VariableStore sharedInstance];
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:[store Translate:@"Identificatie"]
+                                          message:[store Translate:@"Geef je usertoken in:"]
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+     {
+         if (!store.userToken)
+         {
+             textField.placeholder = [store Translate:@"Usertoken"];
+         }
+         else
+         {
+             textField.text = store.userToken;
+         }
+     }];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField)
+     {
+         if (!store.userPwd)
+         {
+             textField.placeholder = [store Translate:@"¨Password"];
+         }
+         else
+         {
+             textField.text = store.userPwd;
+         }
+     }];
+    
+    //Request a user token
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:[store Translate:@"Bewaar"]
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   UITextField *login = alertController.textFields.firstObject;
+                                   store.userToken = login.text;
+                                   UITextField *pwd = [alertController.textFields objectAtIndex:1];
+                                   store.userPwd = pwd.text;
+                                   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                                   [defaults setObject:store.userToken forKey:userTokenDefaultsKey];
+                                   [defaults setObject:store.userPwd forKey:userPwdDefaultsKey];
+                               }];
+    [alertController addAction:okAction];
+    [vc presentViewController:alertController animated:YES completion:nil];
+}
+
 + (void) MakeSimpleRoundView:(UIView *) vw
 {
     [vw.layer setCornerRadius:10.0f];

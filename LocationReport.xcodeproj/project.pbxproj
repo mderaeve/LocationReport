@@ -19,6 +19,7 @@
 		8761E4D81A90E7230004A3BE /* SubZoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4D71A90E7230004A3BE /* SubZoneService.m */; };
 		8761E4DB1A90E7340004A3BE /* PropertyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4DA1A90E7340004A3BE /* PropertyService.m */; };
 		8761E4DE1A90E74E0004A3BE /* PictureService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4DD1A90E74E0004A3BE /* PictureService.m */; };
+		87670C251ACFE8F700A85A4D /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 87670C241ACFE8F700A85A4D /* lock.png */; };
 		8777D41619CA36060098EC55 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8777D41419CA36060098EC55 /* Model.xcdatamodeld */; };
 		8777D41919CAFA9E0098EC55 /* AUPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8777D41819CAFA9E0098EC55 /* AUPicture.m */; };
 		8777D41F19CAFA9F0098EC55 /* AUPropertyTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8777D41E19CAFA9F0098EC55 /* AUPropertyTemplate.m */; };
@@ -27,6 +28,10 @@
 		8777D42E19CAFB450098EC55 /* AUTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8777D42D19CAFB450098EC55 /* AUTranslation.m */; };
 		8777D43119CAFCB50098EC55 /* AUProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8777D43019CAFCB50098EC55 /* AUProject.m */; };
 		8777D43419CC56B30098EC55 /* ZoneReportsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8777D43319CC56B30098EC55 /* ZoneReportsVC.m */; };
+		8799548B1ACC8489008EA8B1 /* CompanyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8799548A1ACC8489008EA8B1 /* CompanyService.m */; };
+		8799548E1ACC84DD008EA8B1 /* DSCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 8799548D1ACC84DD008EA8B1 /* DSCompany.m */; };
+		879F71A51AE6D5C500C60CA6 /* TranslationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 879F71A41AE6D5C500C60CA6 /* TranslationService.m */; };
+		879F71A81AE6D8E700C60CA6 /* DSTranslation.m in Sources */ = {isa = PBXBuildFile; fileRef = 879F71A71AE6D8E700C60CA6 /* DSTranslation.m */; };
 		87B2324519B3AA9400378E49 /* DateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B2324419B3AA9400378E49 /* DateHeader.m */; };
 		87B4CA7619DB235700550DE5 /* AUZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA7519DB235700550DE5 /* AUZone.m */; };
 		87B4CA7919DB235800550DE5 /* AUSubZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA7819DB235800550DE5 /* AUSubZone.m */; };
@@ -136,6 +141,7 @@
 		8761E4DA1A90E7340004A3BE /* PropertyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyService.m; path = Services/PropertyService.m; sourceTree = "<group>"; };
 		8761E4DC1A90E74E0004A3BE /* PictureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PictureService.h; path = Services/PictureService.h; sourceTree = "<group>"; };
 		8761E4DD1A90E74E0004A3BE /* PictureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PictureService.m; path = Services/PictureService.m; sourceTree = "<group>"; };
+		87670C241ACFE8F700A85A4D /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
 		8777D41519CA36060098EC55 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		8777D41719CAFA9E0098EC55 /* AUPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUPicture.h; sourceTree = "<group>"; };
 		8777D41819CAFA9E0098EC55 /* AUPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUPicture.m; sourceTree = "<group>"; };
@@ -151,6 +157,14 @@
 		8777D43019CAFCB50098EC55 /* AUProject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUProject.m; sourceTree = "<group>"; };
 		8777D43219CC56B30098EC55 /* ZoneReportsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoneReportsVC.h; sourceTree = "<group>"; };
 		8777D43319CC56B30098EC55 /* ZoneReportsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoneReportsVC.m; sourceTree = "<group>"; };
+		879954891ACC8489008EA8B1 /* CompanyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompanyService.h; path = Services/CompanyService.h; sourceTree = "<group>"; };
+		8799548A1ACC8489008EA8B1 /* CompanyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CompanyService.m; path = Services/CompanyService.m; sourceTree = "<group>"; };
+		8799548C1ACC84DD008EA8B1 /* DSCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DSCompany.h; path = Models/DSCompany.h; sourceTree = "<group>"; };
+		8799548D1ACC84DD008EA8B1 /* DSCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DSCompany.m; path = Models/DSCompany.m; sourceTree = "<group>"; };
+		879F71A31AE6D5C500C60CA6 /* TranslationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslationService.h; sourceTree = "<group>"; };
+		879F71A41AE6D5C500C60CA6 /* TranslationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslationService.m; sourceTree = "<group>"; };
+		879F71A61AE6D8E700C60CA6 /* DSTranslation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTranslation.h; sourceTree = "<group>"; };
+		879F71A71AE6D8E700C60CA6 /* DSTranslation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTranslation.m; sourceTree = "<group>"; };
 		87B2324319B3AA9400378E49 /* DateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateHeader.h; sourceTree = "<group>"; };
 		87B2324419B3AA9400378E49 /* DateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateHeader.m; sourceTree = "<group>"; };
 		87B4CA7419DB235700550DE5 /* AUZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUZone.h; sourceTree = "<group>"; };
@@ -410,6 +424,10 @@
 				8761E4DA1A90E7340004A3BE /* PropertyService.m */,
 				8761E4DC1A90E74E0004A3BE /* PictureService.h */,
 				8761E4DD1A90E74E0004A3BE /* PictureService.m */,
+				879954891ACC8489008EA8B1 /* CompanyService.h */,
+				8799548A1ACC8489008EA8B1 /* CompanyService.m */,
+				879F71A31AE6D5C500C60CA6 /* TranslationService.h */,
+				879F71A41AE6D5C500C60CA6 /* TranslationService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -429,6 +447,10 @@
 				87D5ABCC1A8C7DEC00FCD98D /* DSSubZone.m */,
 				87D5ABCE1A8C7DFD00FCD98D /* DSPicture.h */,
 				87D5ABCF1A8C7DFD00FCD98D /* DSPicture.m */,
+				8799548C1ACC84DD008EA8B1 /* DSCompany.h */,
+				8799548D1ACC84DD008EA8B1 /* DSCompany.m */,
+				879F71A61AE6D8E700C60CA6 /* DSTranslation.h */,
+				879F71A71AE6D8E700C60CA6 /* DSTranslation.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -725,6 +747,7 @@
 				87DDA02119C2EBC8004A3152 /* download.png */,
 				87DDA01919C1925E004A3152 /* edit.png */,
 				997BE01119406D01005002E0 /* add@2x.png */,
+				87670C241ACFE8F700A85A4D /* lock.png */,
 				997BE01219406D01005002E0 /* camera@2x.png */,
 				997BE01319406D01005002E0 /* delete.png */,
 				997BE01419406D01005002E0 /* search@2x.png */,
@@ -829,6 +852,7 @@
 				99CFCBE3190B04E90066EF1F /* skull.png in Resources */,
 				99F2556318FDABDA00FAB43E /* error.png in Resources */,
 				997BBA5D19068201008A0626 /* house.png in Resources */,
+				87670C251ACFE8F700A85A4D /* lock.png in Resources */,
 				87B56B7B19C8C7A70050A37B /* AddPropertyVC.xib in Resources */,
 				994EAB3618EB163400137F27 /* Images.xcassets in Resources */,
 				994EAB2E18EB163400137F27 /* Main_iPhone.storyboard in Resources */,
@@ -909,6 +933,7 @@
 				99CFCBE1190B01F20066EF1F /* PropertyCell.m in Sources */,
 				99CFCBE9190E67A30066EF1F /* PropertiesVC.m in Sources */,
 				87B4CA8619DD976100550DE5 /* DBTemplates.m in Sources */,
+				8799548E1ACC84DD008EA8B1 /* DSCompany.m in Sources */,
 				87D5ABB51A8BDE2F00FCD98D /* BaseService.m in Sources */,
 				87CEDEDA1AB8B6B8004B1598 /* NetworkManager.m in Sources */,
 				994EAB8318EDBFFE00137F27 /* MainNavContVC.m in Sources */,
@@ -928,6 +953,7 @@
 				997BDFFE193E53DF005002E0 /* PictureEditVC.m in Sources */,
 				8777D41F19CAFA9F0098EC55 /* AUPropertyTemplate.m in Sources */,
 				8777D43119CAFCB50098EC55 /* AUProject.m in Sources */,
+				879F71A51AE6D5C500C60CA6 /* TranslationService.m in Sources */,
 				87D5ABBE1A8C7D2000FCD98D /* DSBaseObject.m in Sources */,
 				997BBA2419063BBF008A0626 /* LeveyPopListView.m in Sources */,
 				87B2324519B3AA9400378E49 /* DateHeader.m in Sources */,
@@ -947,8 +973,10 @@
 				87EDAC3619DFF1D10039EBFE /* TemplateFactory.m in Sources */,
 				870DC29619D057ED009498AF /* SubZoneReportsVC.m in Sources */,
 				87B4CA7F19DB255300550DE5 /* TemplatesVC.m in Sources */,
+				879F71A81AE6D8E700C60CA6 /* DSTranslation.m in Sources */,
 				994EAB2B18EB163400137F27 /* POAppDelegate.m in Sources */,
 				870DC29319D0421E009498AF /* PropertyHeader.m in Sources */,
+				8799548B1ACC8489008EA8B1 /* CompanyService.m in Sources */,
 				994EAB8C18EDC3C300137F27 /* ListButton.m in Sources */,
 				994EAB5F18EC34AE00137F27 /* DBStore.m in Sources */,
 				994EAB5C18EC344E00137F27 /* VariableStore.m in Sources */,

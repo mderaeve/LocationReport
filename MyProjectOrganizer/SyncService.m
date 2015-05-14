@@ -15,6 +15,8 @@
 #import "PropertyService.h"
 #import "Uploader.h"
 #import "PictureService.h"
+#import "CompanyService.h"
+#import "TranslationService.h"
 
 @interface SyncService () <UploaderEvents>
 
@@ -41,7 +43,8 @@
    // VariableStore * store = [VariableStore sharedInstance];
     //For each product, sub product, property, picture, zone, property, picture, subzone, property, picture.
     
-    NSArray * projectList = [DBStore GetAllProjects:[NSNumber numberWithInt:0]];
+    
+    NSArray * projectList = [DBStore GetAllProjectsForSync];
     int i = 0;
     [self SyncProjectWithHud:hud andCounter:i andList:projectList andResultHandler:^(BOOL success, id errorOrNil) {
         if (success)
@@ -52,6 +55,21 @@
         }
     }];
     
+    //try to save the translations;
+    NSArray * translationsArray = [DBStore GetTranslationsForLanguage:[VariableStore sharedInstance].LanguageID];
+    TranslationService * transService = [[TranslationService alloc] init];
+    for (AUTranslation * t in translationsArray)
+    {
+        DSTranslation * trans = [[DSTranslation alloc] init];
+        trans.trans_language = t.trans_language;
+        trans.trans_tag = t.trans_tag;
+        trans.trans_translated = t.trans_translated;
+        trans.comp_id = [VariableStore sharedInstance].comp_id;
+        trans.created =  [NSDate date];
+        
+        [transService saveTranslation:trans];
+    }
+    hud.labelText = @"Translations in sync...";
 }
 
 +(void) SyncProjectWithHud:(MBProgressHUD *) hud andCounter:(int) i andList:(NSArray *) projectList andResultHandler:(SyncProjectsResultBlock) resultHandler
@@ -327,8 +345,27 @@
     }
     hud.mode = MBProgressHUDModeText;
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Send pictures...";
+    hud.labelText = @"Check FTP settings online...";
+    //first get ftp url
+    CompanyService * service = [[CompanyService alloc] init];
+    [service getCompanyWithResultHandler:^(BOOL success, DSCompany *company, id errorOrNil) {
+        if (success==YES)
+        {
+            [VariableStore sharedInstance].ftpPath = company.ftp_url;
+            [VariableStore sharedInstance].ftpPwd = company.ftp_pwd;
+            [VariableStore sharedInstance].ftpUser = company.ftp_user;
+            [self startFTP];
+        }
+        else
+        {
+            [hud hide:YES];
+        }
+    }];
+}
 
+-(void)startFTP
+{
+    hud.labelText = @"Send pictures...";
     allPictures = [DBStore GetAllPictures];
     uploader = [[Uploader alloc] init];
     uploader.delegate = self;
@@ -407,6 +444,10 @@
     {
         //hud.labelText = statusString;
         hud.detailsLabelText = statusString;
+        // Delay execution of my block for 10 seconds.
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 7 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [hud hide:YES];
+        });
     }
     
 }

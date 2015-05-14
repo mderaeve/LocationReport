@@ -193,6 +193,22 @@
 	return _fetchedResultsController;
 }
 
++ (NSArray *) GetAllProjectsForSync
+{
+    NSError *error;
+    NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription * ProjectEntDescr = [NSEntityDescription entityForName:@"AUProject" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    [fetchRequest setEntity:ProjectEntDescr];
+    
+    NSArray * Projects = [[DBStore GetManagedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    if (Projects != nil && Projects.count>0)
+    {
+        return Projects;
+    }
+    //Nothing found
+    return nil;
+}
+
 + (NSArray *) GetAllProjects:(NSNumber *) fromTemplate
 {
     NSError *error;

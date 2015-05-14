@@ -71,6 +71,7 @@
         {
             [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"navigation.png"],@"img",[store Translate:@"$PO$EditTemplates"],@"text", nil]];
         }
+        [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"lock.png"],@"img",[store Translate:@"$PO$UserSettings"],@"text", nil]];
         [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"navigation.png"],@"img",[store Translate:@"$PO$Cancel"],@"text", nil]];
         
         bListOpen=YES;
@@ -126,6 +127,10 @@
         }
         //[senderVC.navigationController popToRootViewControllerAnimated:YES];
         //[StoryBoardNavigation NavigateToTypesStoryBoard:senderVC];
+    }
+    else if ([itemText isEqualToString:[[VariableStore sharedInstance]  Translate:@"$PO$UserSettings"]])
+    {
+        [GeneralFunctions showUserToken:senderVC];
     }
 }
 - (void)leveyPopListViewDidCancel

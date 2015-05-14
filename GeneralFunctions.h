@@ -10,6 +10,8 @@
 
 @interface GeneralFunctions : NSObject
 
++(void) showUserToken:(UIViewController * ) vc;
+
 + (void) MakeSimpleRoundView:(UIView *) vw;
 
 + (void) MakeRoundView:(UIView *) vw;

@@ -35,6 +35,8 @@
 
 + (NSArray *) GetOpenProjects;
 
++ (NSArray *) GetAllProjectsForSync;
+
 + (NSFetchedResultsController *) GetProjectDatesByMonthAndYear: (NSString *) search;
 
 + (NSFetchedResultsController *) GetProjectDatesByMonthAndYearSortedOnTitle: (NSString *) search;
