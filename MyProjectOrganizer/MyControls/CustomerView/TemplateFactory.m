@@ -16,21 +16,25 @@
 {
     [VariableStore sharedInstance].selectedProject.proj_templateUsed_id = [VariableStore sharedInstance].selectedTemplate.proj_id;
     [VariableStore sharedInstance].selectedProject.proj_templateType = [VariableStore sharedInstance].selectedTemplate.proj_templateType;
-    //Copy all template properties to the selected project
-    NSArray * allPropertiesToAddToProject = [DBStore GetAllPropertiesForID:[VariableStore sharedInstance].selectedTemplate
-                                             .prop_id];
-    AUProperty * newProp;
-    for (AUProperty * prop in allPropertiesToAddToProject)
+    [VariableStore sharedInstance].selectedProject.proj_title = [VariableStore sharedInstance].selectedTemplate.proj_title;
+    
+    if ([DBStore GetAllPropertiesForID:[VariableStore sharedInstance].selectedTemplate.prop_id] != nil)
     {
-        if(newProp)
+        //Copy all template properties to the selected project
+        NSArray * allPropertiesToAddToProject = [DBStore GetAllPropertiesForID:[VariableStore sharedInstance].selectedTemplate.prop_id];
+        AUProperty * newProp;
+        for (AUProperty * prop in allPropertiesToAddToProject)
         {
-            [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:newProp.prop_id];
-        }
-        else
-        {
-            newProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
-            [VariableStore sharedInstance].selectedProject.prop_id = newProp.prop_id;
-            //[DBStore SaveContext];
+            if(newProp)
+            {
+                [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:newProp.prop_id];
+            }
+            else
+            {
+                newProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
+                [VariableStore sharedInstance].selectedProject.prop_id = newProp.prop_id;
+                //[DBStore SaveContext];
+            }
         }
     }
     if ([[VariableStore sharedInstance].selectedTemplate.proj_templateType  isEqual: kTemplateFull])
@@ -41,42 +45,48 @@
             //Add all zone to project
             AUZone * newZone = [DBStore CreateZone:templateZone.z_title AndInfo:templateZone.z_info AndProjectID:[VariableStore sharedInstance].selectedProject.proj_id];
             
-            //Add all properties to zone
-            NSArray * allPropertiesToAddToZone = [DBStore GetAllPropertiesForID:templateZone.prop_id];
-            AUProperty * newZoneProp;
-            for (AUProperty * prop in allPropertiesToAddToZone)
+            if (templateZone.prop_id != nil)
             {
-                if(newZoneProp)
+                //Add all properties to zone
+                NSArray * allPropertiesToAddToZone = [DBStore GetAllPropertiesForID:templateZone.prop_id];
+                AUProperty * newZoneProp;
+                for (AUProperty * prop in allPropertiesToAddToZone)
                 {
-                    [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:newZoneProp.prop_id];
-                }
-                else
-                {
-                    newZoneProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
-                    newZone.prop_id = newZoneProp.prop_id;
-                    //[DBStore SaveContext];
+                    if(newZoneProp)
+                    {
+                        [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:newZoneProp.prop_id];
+                    }
+                    else
+                    {
+                        newZoneProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
+                        newZone.prop_id = newZoneProp.prop_id;
+                        //[DBStore SaveContext];
+                    }
                 }
             }
-            
             NSArray * subZones = [DBStore GetAllSubZones:templateZone.z_id];
             for (AUSubZone * templateSubZone in subZones)
             {
                 //Add all zone to project
                 AUSubZone * newSubZone = [DBStore CreateSubZone:templateSubZone.sz_title AndInfo:templateSubZone.sz_info AndZoneID:newZone.z_id];
-                //Add all properties to zone
-                NSArray * allPropertiesToAddToSubZone = [DBStore GetAllPropertiesForID:templateSubZone.prop_id];
-                AUProperty * newSubZoneProp;
-                for (AUProperty * prop in allPropertiesToAddToSubZone)
+               
+                if (templateSubZone.prop_id!=nil)
                 {
-                    if(newSubZoneProp)
+                    //Add all properties to zone
+                    NSArray * allPropertiesToAddToSubZone = [DBStore GetAllPropertiesForID:templateSubZone.prop_id];
+                    AUProperty * newSubZoneProp;
+                    for (AUProperty * prop in allPropertiesToAddToSubZone)
                     {
-                        [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:newSubZoneProp.prop_id];
-                    }
-                    else
-                    {
-                        newSubZoneProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
-                        newSubZone.prop_id = newSubZoneProp.prop_id;
-                        //[DBStore SaveContext];
+                        if(newSubZoneProp)
+                        {
+                            [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:newSubZoneProp.prop_id];
+                        }
+                        else
+                        {
+                            newSubZoneProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
+                            newSubZone.prop_id = newSubZoneProp.prop_id;
+                            //[DBStore SaveContext];
+                        }
                     }
                 }
             }

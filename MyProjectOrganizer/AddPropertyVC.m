@@ -222,31 +222,7 @@
     if (self.property==nil)
     {
         AUProperty * prop = [DBStore CreateProperty:title AndValue:value AndType:choice  AndPropertyID:self.propID];
-        if ([choice isEqualToString:store.sChoiceText])
-        {
-            //if the template already exists for property, do nothing, else create the template
-            //value = template_title, prop_title = prop.title and prop.
-            // prop_type;
-            // prop_title;
-            // prop_default_value;
-            // NSNumber * templ_id;
-            // templ_title;
-            //Kijken als de gekozen templ title bestaat, zoniet inserten
-            AUPropertyTemplate * existingProp;
-            
-            existingTempl = [DBStore GetPropertyTemplateByTemplTitle:title];
-            
-            //Dan kijken al de gekozen val bestaat, zoniet, insert en koppelen aan de templ
-            if (existingTempl==nil)
-            {
-                existingTempl = [DBStore CreatePropertyTemplate:title AndValue:nil AndType:choice andTemplateID:nil];
-            }
-            existingProp = [DBStore GetPropertyTemplateByPropTitle:value];
-            if (existingProp==nil)
-            {
-                [DBStore CreatePropertyTemplate:existingTempl.templ_title AndValue:value AndType:choice andTemplateID:existingTempl.templ_id];
-            }
-        }
+        
         [DBStore SaveContext];
         if ([self.delegate respondsToSelector:@selector(PropertyAdded:)])
         {
@@ -262,6 +238,32 @@
         {
             [self.delegate PropertyChanged];
         }  
+    }
+    if ([choice isEqualToString:store.sChoiceText])
+    {
+        //if the template already exists for property, do nothing, else create the template
+        //value = template_title, prop_title = prop.title and prop.
+        // prop_type;
+        // prop_title;
+        // prop_default_value;
+        // NSNumber * templ_id;
+        // templ_title;
+        //Kijken als de gekozen templ title bestaat, zoniet inserten
+        AUPropertyTemplate * existingProp;
+        
+        existingTempl = [DBStore GetPropertyTemplateByTemplTitle:title];
+        
+        //Dan kijken al de gekozen val bestaat, zoniet, insert en koppelen aan de templ
+        if (existingTempl==nil)
+        {
+            existingTempl = [DBStore CreatePropertyTemplate:title AndValue:nil AndType:choice andTemplateID:nil];
+        }
+        existingProp = [DBStore GetPropertyTemplateByTemplateTitle:title andPropTitle:value];
+        if (existingProp==nil)
+        {
+            [DBStore CreatePropertyTemplate:existingTempl.templ_title AndValue:value AndType:choice andTemplateID:existingTempl.templ_id];
+        }
+        [DBStore SaveContext];
     }
 }
 

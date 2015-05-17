@@ -93,17 +93,6 @@
         optionsToSet=nil;
         [VariableStore sharedInstance].creatingTemplate=NO;
         [senderVC.navigationController popToRootViewControllerAnimated:YES];
-       /* NSArray *viewControllers = senderVC.navigationController.viewControllers;
-        NSMutableArray *newViewControllers = [NSMutableArray array];
-        
-        // preserve the root view controller
-        [newViewControllers addObject:[viewControllers objectAtIndex:0]];
-        // add the new view controller
-        UIStoryboard * sb = [UIStoryboard storyboardWithName:@"TemplatesStoryboard" bundle:nil];
-        UIViewController * vcTo = [sb instantiateInitialViewController];
-        [newViewControllers addObject:vcTo];
-        // animatedly change the navigation stack
-        [senderVC.navigationController setViewControllers:newViewControllers animated:YES];*/
     }
 }
 - (void)leveyPopListViewDidCancel

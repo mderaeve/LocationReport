@@ -44,6 +44,11 @@
     {
         [self setTitle:store.selectedSubZone.sz_title];
     }
+    else if (store.selectedSubZoneTemplate !=nil)
+    {
+        self.txtInfo.text = store.selectedSubZoneTemplate.sz_info;
+        self.txtTitle.text = store.selectedSubZoneTemplate.sz_title;
+    }
     else
     {
         [self setTitle:[[VariableStore sharedInstance] Translate:@"$PO$NewSubZone"]];

@@ -35,8 +35,6 @@
 		87B2324519B3AA9400378E49 /* DateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B2324419B3AA9400378E49 /* DateHeader.m */; };
 		87B4CA7619DB235700550DE5 /* AUZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA7519DB235700550DE5 /* AUZone.m */; };
 		87B4CA7919DB235800550DE5 /* AUSubZone.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA7819DB235800550DE5 /* AUSubZone.m */; };
-		87B4CA7C19DB24F200550DE5 /* TemplatesStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87B4CA7B19DB24F200550DE5 /* TemplatesStoryboard.storyboard */; };
-		87B4CA7F19DB255300550DE5 /* TemplatesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA7E19DB255300550DE5 /* TemplatesVC.m */; };
 		87B4CA8319DC465900550DE5 /* TemplateChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA8219DC465900550DE5 /* TemplateChooser.m */; };
 		87B4CA8619DD976100550DE5 /* DBTemplates.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B4CA8519DD976100550DE5 /* DBTemplates.m */; };
 		87B56B7A19C8C7A70050A37B /* AddPropertyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87B56B7819C8C7A70050A37B /* AddPropertyVC.m */; };
@@ -171,9 +169,6 @@
 		87B4CA7519DB235700550DE5 /* AUZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUZone.m; sourceTree = "<group>"; };
 		87B4CA7719DB235800550DE5 /* AUSubZone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUSubZone.h; sourceTree = "<group>"; };
 		87B4CA7819DB235800550DE5 /* AUSubZone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AUSubZone.m; sourceTree = "<group>"; };
-		87B4CA7B19DB24F200550DE5 /* TemplatesStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TemplatesStoryboard.storyboard; sourceTree = "<group>"; };
-		87B4CA7D19DB255300550DE5 /* TemplatesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplatesVC.h; sourceTree = "<group>"; };
-		87B4CA7E19DB255300550DE5 /* TemplatesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplatesVC.m; sourceTree = "<group>"; };
 		87B4CA8119DC465900550DE5 /* TemplateChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemplateChooser.h; sourceTree = "<group>"; };
 		87B4CA8219DC465900550DE5 /* TemplateChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemplateChooser.m; sourceTree = "<group>"; };
 		87B4CA8419DD976100550DE5 /* DBTemplates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTemplates.h; sourceTree = "<group>"; };
@@ -353,16 +348,6 @@
 				870DC29219D0421E009498AF /* PropertyHeader.m */,
 			);
 			name = Property;
-			sourceTree = "<group>";
-		};
-		87B4CA7A19DB24CF00550DE5 /* Templates */ = {
-			isa = PBXGroup;
-			children = (
-				87B4CA7B19DB24F200550DE5 /* TemplatesStoryboard.storyboard */,
-				87B4CA7D19DB255300550DE5 /* TemplatesVC.h */,
-				87B4CA7E19DB255300550DE5 /* TemplatesVC.m */,
-			);
-			name = Templates;
 			sourceTree = "<group>";
 		};
 		87B4CA8019DC463B00550DE5 /* Template */ = {
@@ -671,7 +656,6 @@
 		99F2553A18F481A500FAB43E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				87B4CA7A19DB24CF00550DE5 /* Templates */,
 				870DC29919D58D16009498AF /* Types */,
 				99F2553C18F481B700FAB43E /* Company */,
 				99F2554418F48A5400FAB43E /* Home */,
@@ -857,7 +841,6 @@
 				994EAB3618EB163400137F27 /* Images.xcassets in Resources */,
 				994EAB2E18EB163400137F27 /* Main_iPhone.storyboard in Resources */,
 				997BE01A19406D01005002E0 /* upcloud@2x.png in Resources */,
-				87B4CA7C19DB24F200550DE5 /* TemplatesStoryboard.storyboard in Resources */,
 				87CEDEDE1AB8BA67004B1598 /* movie.png in Resources */,
 				87DDA01A19C1925E004A3152 /* edit.png in Resources */,
 				997BE01C19410DE7005002E0 /* list.png in Resources */,
@@ -972,7 +955,6 @@
 				997BBA611906862C008A0626 /* HomeVC.m in Sources */,
 				87EDAC3619DFF1D10039EBFE /* TemplateFactory.m in Sources */,
 				870DC29619D057ED009498AF /* SubZoneReportsVC.m in Sources */,
-				87B4CA7F19DB255300550DE5 /* TemplatesVC.m in Sources */,
 				879F71A81AE6D8E700C60CA6 /* DSTranslation.m in Sources */,
 				994EAB2B18EB163400137F27 /* POAppDelegate.m in Sources */,
 				870DC29319D0421E009498AF /* PropertyHeader.m in Sources */,

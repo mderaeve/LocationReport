@@ -48,6 +48,7 @@
     else if (store.selectedZoneTemplate !=nil)
     {
         self.txtDescription.text = store.selectedZoneTemplate.z_info;
+        self.txtTitle.text = store.selectedZoneTemplate.z_title;
     }
     else
     {

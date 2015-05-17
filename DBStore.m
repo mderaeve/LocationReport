@@ -553,7 +553,7 @@
     return returnVal;
 }
 
-+(AUPropertyTemplate *) GetPropertyTemplateByPropTitle:(NSString *)propTitle
++(AUPropertyTemplate *) GetPropertyTemplateByTemplateTitle:(NSString *) templateTitle andPropTitle:(NSString *) propTitle;
 {
     NSError *error;
     NSFetchRequest * checkForTranslation = [[NSFetchRequest alloc] init];
@@ -562,7 +562,7 @@
     
     NSPredicate *predicate;
     
-    predicate = [NSPredicate predicateWithFormat:@"prop_title = %@",propTitle];
+    predicate = [NSPredicate predicateWithFormat:@"prop_title = %@ and templ_title = %@",propTitle, templateTitle];
     
     [checkForTranslation setPredicate:predicate];
     NSArray * returnVals = [[DBStore GetManagedObjectContext] executeFetchRequest:checkForTranslation error:&error];

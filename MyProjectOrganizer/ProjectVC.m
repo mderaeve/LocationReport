@@ -52,6 +52,7 @@
         [self setTitle:[[VariableStore sharedInstance] Translate:@"$PO$NewProject"]];
         if (store.selectedTemplate!=nil)
         {
+            self.txtTitle.text = store.selectedTemplate.proj_title;
             self.txtInfo.text = store.selectedTemplate.proj_info;
         }
     }

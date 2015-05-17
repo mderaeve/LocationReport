@@ -83,7 +83,7 @@
 
 + (AUPropertyTemplate *) GetPropertyTemplateByTemplTitle:(NSString *) templTitle;
 
-+ (AUPropertyTemplate *) GetPropertyTemplateByPropTitle:(NSString *) propTitle;
++ (AUPropertyTemplate *) GetPropertyTemplateByTemplateTitle:(NSString *) templateTitle andPropTitle:(NSString *) propTitle;
 
 + (AUPropertyTemplate *) CreatePropertyTemplate:(NSString *) templ_title AndValue:(NSString *) prop_title AndType:(NSString *) prop_type andTemplateID:(NSNumber *) temp_id;
 
