@@ -121,22 +121,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyProjectOrganizer/SubZonesVC.m"
-            timestampString = "453587664.892442"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MyProjectOrganizer/TemplateChooser.m"
             timestampString = "453587753.675672"
             startingColumnNumber = "9223372036854775807"
@@ -153,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyProjectOrganizer/ZoneReportsVC.m"
-            timestampString = "453587836.640725"
+            filePath = "MyProjectOrganizer/SubZonesVC.m"
+            timestampString = "453842432.853371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "-btnNewSubZone:"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "-btnSave:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

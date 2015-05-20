@@ -37,6 +37,25 @@
             }
         }
     }
+    if ([DBStore GetPicturesID:[VariableStore sharedInstance].selectedTemplate.pic_id] != nil)
+    {
+        //Copy all template properties to the selected project
+        NSArray * allPicturesToAddToProject = [DBStore GetPicturesID:[VariableStore sharedInstance].selectedTemplate.pic_id];
+        AUPicture * newPic;
+        for (AUPicture * pic in allPicturesToAddToProject)
+        {
+            if(newPic)
+            {
+                [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:newPic.pic_id];
+            }
+            else
+            {
+                newPic = [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:nil];
+                [VariableStore sharedInstance].selectedProject.pic_id = newPic.pic_id;
+                //[DBStore SaveContext];
+            }
+        }
+    }
     if ([[VariableStore sharedInstance].selectedTemplate.proj_templateType  isEqual: kTemplateFull])
     {
         NSArray * zones = [DBStore GetAllZones:[VariableStore sharedInstance].selectedTemplate.proj_id];
@@ -60,7 +79,24 @@
                     {
                         newZoneProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
                         newZone.prop_id = newZoneProp.prop_id;
-                        //[DBStore SaveContext];
+                    }
+                }
+            }
+            if (templateZone.pic_id != nil)
+            {
+                //Copy all template properties to the selected project
+                NSArray * allPicturesToAddToZone = [DBStore GetPicturesID:templateZone.pic_id];
+                AUPicture * newPic;
+                for (AUPicture * pic in allPicturesToAddToZone)
+                {
+                    if(newPic)
+                    {
+                        [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:newPic.pic_id];
+                    }
+                    else
+                    {
+                        newPic = [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:nil];
+                        newZone.pic_id = newPic.pic_id;
                     }
                 }
             }
@@ -85,7 +121,24 @@
                         {
                             newSubZoneProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
                             newSubZone.prop_id = newSubZoneProp.prop_id;
-                            //[DBStore SaveContext];
+                        }
+                    }
+                }
+                if (templateSubZone.pic_id != nil)
+                {
+                    //Copy all template properties to the selected project
+                    NSArray * allPicturesToAddToSubZone = [DBStore GetPicturesID:templateSubZone.pic_id];
+                    AUPicture * newPic;
+                    for (AUPicture * pic in allPicturesToAddToSubZone)
+                    {
+                        if(newPic)
+                        {
+                            [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:newPic.pic_id];
+                        }
+                        else
+                        {
+                            newPic = [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:nil];
+                            newSubZone.pic_id = newPic.pic_id;
                         }
                     }
                 }
@@ -113,6 +166,20 @@
             //[DBStore SaveContext];
         }
     }
+    NSArray * allPicturesToAddToZone =  [DBStore GetPicturesID:[VariableStore sharedInstance].selectedZoneTemplate.pic_id];
+    AUPicture * newPic;
+    for (AUPicture * pic in allPicturesToAddToZone)
+    {
+        if(newPic)
+        {
+            [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:newPic.pic_id];
+        }
+        else
+        {
+            newPic = [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:nil];
+            [VariableStore sharedInstance].selectedZone.pic_id = newPic.pic_id;
+        }
+    }
 }
 
 +(void) generateAfterSubZoneCreating
@@ -130,6 +197,20 @@
             newSubZoneProp = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_type AndPropertyID:nil];
             [VariableStore sharedInstance].selectedSubZone.prop_id = newSubZoneProp.prop_id;
             //[DBStore SaveContext];
+        }
+    }
+    NSArray * allPicturesToAddToSubZone = [DBStore GetAllPropertiesForID:[VariableStore sharedInstance].selectedSubZoneTemplate.pic_id];
+    AUPicture * newPic;
+    for (AUPicture * pic in allPicturesToAddToSubZone)
+    {
+        if(newPic)
+        {
+            [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:newPic.pic_id];
+        }
+        else
+        {
+            newPic = [DBStore CreatePictureWithURL:pic.pic_url AndComment:@"fromTemplate" AndPictureID:nil];
+            [VariableStore sharedInstance].selectedSubZone.pic_id = newPic.pic_id;
         }
     }
 }

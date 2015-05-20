@@ -239,12 +239,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
     
     if (!store.selectedSubZone.pic_id || [store.selectedSubZone.pic_id intValue] == 0)
     {
-        AUPicture * pic = [DBStore CreatePicture:self.lblProjectTitle.text AndURL:url AndComment:@"" AndPictureID:nil];
+        AUPicture * pic = [DBStore CreatePictureWithURL:url AndComment:@"" AndPictureID:nil];
         store.selectedSubZone.pic_id = pic.pic_id;
     }
     else
     {
-        [DBStore CreatePicture:self.lblProjectTitle.text AndURL:url AndComment:@"" AndPictureID:store.selectedSubZone.pic_id];
+        [DBStore CreatePictureWithURL:url AndComment:@"" AndPictureID:store.selectedSubZone.pic_id];
     }
     [DBStore SaveContext];
     [self GetPicturesForSubZone];

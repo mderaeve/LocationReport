@@ -606,7 +606,7 @@
 
 #pragma mark Picture
 
-+ (AUPicture *)CreatePicture:(NSString *)title AndURL:(NSString *)url AndComment:(NSString *)comment AndPictureID:(NSNumber *) pictureID
++ (AUPicture *)CreatePictureWithURL:(NSString *)url AndComment:(NSString *)comment AndPictureID:(NSNumber *) pictureID
 {
     AUPicture * pic = [NSEntityDescription insertNewObjectForEntityForName:@"AUPicture" inManagedObjectContext:[DBStore GetManagedObjectContext]];
     if(pictureID)

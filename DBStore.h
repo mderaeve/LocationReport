@@ -91,7 +91,7 @@
 
 #pragma mark Pictures
 
-+ (AUPicture *) CreatePicture:(NSString *)title AndURL:(NSString *) url AndComment:(NSString *) comment AndPictureID:(NSNumber *) pictureID;
++ (AUPicture *) CreatePictureWithURL:(NSString *) url AndComment:(NSString *) comment AndPictureID:(NSNumber *) pictureID;
 
 + (NSArray *) GetPicturesID:(NSNumber *) pictureID;
 

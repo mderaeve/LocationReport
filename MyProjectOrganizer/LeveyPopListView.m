@@ -173,11 +173,19 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         if ([_delegate respondsToSelector:@selector(leveyPopListView:didSelectedIndex:)])
             [_delegate leveyPopListView:self didSelectedIndex:[indexPath row]];
+        @try {
+            if (_handlerBlock)
+                _handlerBlock(indexPath.row);
+            // dismiss self
+            [self fadeOut];
+        }
+        @catch (NSException *exception) {
+            //
+        }
+        @finally {
+            //
+        }
         
-        if (_handlerBlock)
-            _handlerBlock(indexPath.row);
-        // dismiss self
-        [self fadeOut];
     }
     else
     {
