@@ -23,6 +23,8 @@
 @property (strong, nonatomic) NSString * DeviceCode;
 @property (strong, nonatomic) NSString * LanguageID;
 
+#pragma mark Selected
+
 @property (strong, nonatomic) AUProject * selectedProject;
 @property (strong, nonatomic) AUZone * selectedZone;
 @property (strong, nonatomic) AUSubZone * selectedSubZone;
@@ -31,6 +33,8 @@
 @property (strong, nonatomic) AUProject * selectedTemplate;
 @property (strong, nonatomic) AUZone * selectedZoneTemplate;
 @property (strong, nonatomic) AUSubZone * selectedSubZoneTemplate;
+
+#pragma mark Variables
 
 @property (strong, nonatomic) NSMutableArray * HomeButtonsArray;
 
@@ -59,5 +63,9 @@
 @property (nonatomic, strong) NSString * ftpPath;
 @property (nonatomic, strong)  NSString * ftpUser;
 @property (nonatomic, strong)  NSString * ftpPwd;
+
+#pragma mark Startup
+
+@property (nonatomic, strong) NSString * selectedDefault;
 
 @end

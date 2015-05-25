@@ -18,6 +18,14 @@
 {
     [VariableStore sharedInstance].creatingTemplate = NO;
     // Override point for customization after application launch.
+    
+    //Check if the user had chosen a default template.
+    if ([VariableStore sharedInstance].selectedDefault ==nil)
+    {
+        //Show template chooser.
+        
+    }
+    
     return YES;
 }
 

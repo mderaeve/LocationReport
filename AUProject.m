@@ -34,7 +34,7 @@
         NSCalendar *calendar = [NSCalendar currentCalendar];
     
     NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit) fromDate:[self proj_date]];
-    tmp = [NSString stringWithFormat:@"%ld", ([components year] * 1000) + [components month]];
+    tmp = [NSString stringWithFormat:@"%d", ([components year] * 1000) + [components month]];
     return tmp;
 }
 
