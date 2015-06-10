@@ -465,7 +465,29 @@
    // hud.labelText = statusString;
 }
 
+#pragma mark Templates
 
++(void) GetTemplates:(UIView *) vw
+{
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:vw animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
+    hud.labelText = @"Load new templates";
+    ProjectService * projectService = [[ProjectService alloc] init];
+    
+    [projectService getTemplates:^(BOOL success, NSArray *projects, id errorOrNil)
+    {
+        if (success==YES)
+        {
+            //Save projects and get properties, pictures and zones.
+            for (DSProject * p in projects)
+            {
+                NSLog(@"ID: %@ Title: %@ Template: %@",p.proj_id, p.proj_title, p.proj_isTemplate);
+            }
+        }
+        
+    }];
+     }
 
 
 

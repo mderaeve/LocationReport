@@ -31,8 +31,8 @@
         myInstance.ftpPath = @"ftp://173.248.142.19/dailycode.info/data";
         myInstance.ftpUser = @"dailycod";
         
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        myInstance.selectedDefault = [defaults objectForKey:@"selectedDefault"];
+        //NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        //myInstance.selectedDefault = [defaults objectForKey:@"selectedDefault"];
        
     }
     return myInstance;

@@ -9,6 +9,7 @@
 #import "SettingsMenuVC.h"
 #import "MainView.h"
 #import "ProjectHomeVC.h"
+#import "SyncService.h"
 
 
 @interface SettingsMenuVC ()
@@ -71,6 +72,7 @@
         {
             [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"navigation.png"],@"img",[store Translate:@"$PO$EditTemplates"],@"text", nil]];
         }
+        [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"download.png"],@"img",[store Translate:@"$PO$DownloadTemplates"],@"text", nil]];
         [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"lock.png"],@"img",[store Translate:@"$PO$UserSettings"],@"text", nil]];
         [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"navigation.png"],@"img",[store Translate:@"$PO$Cancel"],@"text", nil]];
         
@@ -131,6 +133,11 @@
     else if ([itemText isEqualToString:[[VariableStore sharedInstance]  Translate:@"$PO$UserSettings"]])
     {
         [GeneralFunctions showUserToken:senderVC];
+    }
+    else if ([itemText isEqualToString:[[VariableStore sharedInstance]  Translate:@"$PO$DownloadTemplates"]])
+    {
+        //GetTemplatesFromStore
+        [SyncService GetTemplates:senderVC.view];
     }
 }
 - (void)leveyPopListViewDidCancel

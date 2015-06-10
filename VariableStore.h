@@ -66,6 +66,6 @@
 
 #pragma mark Startup
 
-@property (nonatomic, strong) NSString * selectedDefault;
+//@property (nonatomic, strong) NSString * selectedDefault;
 
 @end

@@ -71,7 +71,6 @@
 		994EAB2518EB163400137F27 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 994EAB2318EB163400137F27 /* InfoPlist.strings */; };
 		994EAB2718EB163400137F27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 994EAB2618EB163400137F27 /* main.m */; };
 		994EAB2B18EB163400137F27 /* POAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 994EAB2A18EB163400137F27 /* POAppDelegate.m */; };
-		994EAB2E18EB163400137F27 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994EAB2C18EB163400137F27 /* Main_iPhone.storyboard */; };
 		994EAB3118EB163400137F27 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 994EAB2F18EB163400137F27 /* Main_iPad.storyboard */; };
 		994EAB3618EB163400137F27 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 994EAB3518EB163400137F27 /* Images.xcassets */; };
 		994EAB5C18EC344E00137F27 /* VariableStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 994EAB5B18EC344E00137F27 /* VariableStore.m */; };
@@ -231,7 +230,6 @@
 		994EAB2818EB163400137F27 /* LocationReport-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LocationReport-Prefix.pch"; sourceTree = "<group>"; };
 		994EAB2918EB163400137F27 /* POAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = POAppDelegate.h; sourceTree = "<group>"; };
 		994EAB2A18EB163400137F27 /* POAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = POAppDelegate.m; sourceTree = "<group>"; };
-		994EAB2D18EB163400137F27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		994EAB3018EB163400137F27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		994EAB3518EB163400137F27 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		994EAB5A18EC344E00137F27 /* VariableStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableStore.h; sourceTree = "<group>"; };
@@ -512,7 +510,6 @@
 				994EAB5618EC113900137F27 /* GENERAL */,
 				994EAB2918EB163400137F27 /* POAppDelegate.h */,
 				994EAB2A18EB163400137F27 /* POAppDelegate.m */,
-				994EAB2C18EB163400137F27 /* Main_iPhone.storyboard */,
 				994EAB2F18EB163400137F27 /* Main_iPad.storyboard */,
 				994EAB3518EB163400137F27 /* Images.xcassets */,
 				994EAB2118EB163400137F27 /* Supporting Files */,
@@ -839,7 +836,6 @@
 				87670C251ACFE8F700A85A4D /* lock.png in Resources */,
 				87B56B7B19C8C7A70050A37B /* AddPropertyVC.xib in Resources */,
 				994EAB3618EB163400137F27 /* Images.xcassets in Resources */,
-				994EAB2E18EB163400137F27 /* Main_iPhone.storyboard in Resources */,
 				997BE01A19406D01005002E0 /* upcloud@2x.png in Resources */,
 				87CEDEDE1AB8BA67004B1598 /* movie.png in Resources */,
 				87DDA01A19C1925E004A3152 /* edit.png in Resources */,
@@ -989,14 +985,6 @@
 				994EAB2418EB163400137F27 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		994EAB2C18EB163400137F27 /* Main_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				994EAB2D18EB163400137F27 /* Base */,
-			);
-			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
 		};
 		994EAB2F18EB163400137F27 /* Main_iPad.storyboard */ = {

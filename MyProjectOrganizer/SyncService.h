@@ -15,4 +15,6 @@
 
 - (void) SyncPictures:(UIView *) vw;
 
++ (void) GetTemplates:(UIView *) vw;
+
 @end

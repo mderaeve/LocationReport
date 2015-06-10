@@ -49,4 +49,30 @@
      }];
 }
 
+-(void) getTemplates:(GetProjectsResultBlock) resultHandler
+{
+    
+    NSString *serviceName = @"Projects/Templates";
+    
+    [self performGetRequest:serviceName withParameters:nil withSuccesHandler:^(NSDictionary* result)
+     {
+         NSMutableArray *results = [NSMutableArray array];
+         if (results)
+         {
+             for(NSDictionary *dict in result){
+                 NSError *error;
+                 DSProject *p = [[DSProject alloc] initWithDictionary:dict error:&error];
+                 
+                 if(!error){
+                     [results addObject:p];
+                 } else {
+                     NSLog(@"Error decoding Team: %@", error);
+                 }
+             }
+         }
+         resultHandler(YES, [NSArray arrayWithArray:results], nil);
+     } andErrorHandler:^(NSError *error) {
+         resultHandler(NO, nil, error);
+     }];
+}
 @end

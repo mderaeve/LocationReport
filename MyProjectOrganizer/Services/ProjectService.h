@@ -18,4 +18,6 @@ typedef void (^GetProjectsResultBlock)(BOOL success, NSArray * projects,  id err
 
 -(void) getAllProjects:(GetProjectsResultBlock) resultHandler;
 
+-(void) getTemplates: (GetProjectsResultBlock) resultHandler;
+
 @end
