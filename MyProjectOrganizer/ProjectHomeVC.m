@@ -15,6 +15,7 @@
 @interface ProjectHomeVC ()
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (weak, nonatomic) IBOutlet ADBannerView *_UIiAD;
 
 @end
 

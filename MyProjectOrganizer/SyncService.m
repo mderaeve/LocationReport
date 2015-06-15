@@ -39,8 +39,8 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:vw animated:YES];
     hud.mode = MBProgressHUDModeText;
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Load and send data...";
-   // VariableStore * store = [VariableStore sharedInstance];
+    hud.labelText = [[VariableStore sharedInstance ] Translate: @"Load and send data..."];
+    // VariableStore * store = [VariableStore sharedInstance];
     //For each product, sub product, property, picture, zone, property, picture, subzone, property, picture.
     
     
@@ -69,7 +69,7 @@
         
         [transService saveTranslation:trans];
     }
-    hud.labelText = @"Translations in sync...";
+    hud.labelText = [[VariableStore sharedInstance ] Translate: @"Translations in sync..."];
 }
 
 +(void) SyncProjectWithHud:(MBProgressHUD *) hud andCounter:(int) i andList:(NSArray *) projectList andResultHandler:(SyncProjectsResultBlock) resultHandler
@@ -89,6 +89,7 @@
         p.pic_id = project.pic_id ? project.pic_id:[NSNumber numberWithInt:0];
         
         p.proj_isTemplate = project.proj_isTemplate;
+        p.proj_templateType = project.proj_templateType;
         p.proj_status = project.proj_status;
         // p.proj_templateType = project.proj_templateType ? project.proj_isTemplate:[NSNumber numberWithInt:0];
         // p.proj_templateUsed_id = project.proj_templateUsed_id ? project.proj_templateUsed_id:[NSNumber numberWithInt:0];
@@ -403,7 +404,7 @@
         UIImage *im;
         if (iref) {
             im = [UIImage imageWithCGImage:iref scale:[rep scale] orientation:(UIImageOrientation)[rep orientation]];
-             [uploader sendAction:im andSubPath:subPath];
+            [uploader sendAction:im andSubPath:subPath];
         }
         else {
             //Something is wrong with the rep
@@ -427,7 +428,7 @@
                        resultBlock:resultblock
                       failureBlock:failureblock];
     }
-   
+    
 }
 
 -(void) sendDidStopWithStatus:(NSString *)statusString
@@ -435,10 +436,10 @@
     
     if ([statusString isEqualToString:@"Put succeeded"])
     {
-       //OK
+        //OK
         picIndex = picIndex +1;
         [self continueUploadPictures];
-         hud.detailsLabelText = @"Send ok!";
+        hud.detailsLabelText = @"Send ok!";
     }
     else
     {
@@ -455,14 +456,14 @@
 -(void)sendDidStart:(NSString *)url
 {
     /*if (url.length > 20)
-    {
-        hud.labelText = [url substringFromIndex:(url.length - 20)];
-    }*/
+     {
+     hud.labelText = [url substringFromIndex:(url.length - 20)];
+     }*/
 }
 
 -(void) updateStatus:(NSString *)statusString
 {
-   // hud.labelText = statusString;
+    // hud.labelText = statusString;
 }
 
 #pragma mark Templates
@@ -472,22 +473,137 @@
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:vw animated:YES];
     hud.mode = MBProgressHUDModeText;
     //hud.mode = MBProgressHUDModeDeterminateHorizontalBar;
-    hud.labelText = @"Load new templates";
+    hud.labelText = [[VariableStore sharedInstance ] Translate: @"Download templates"];
     ProjectService * projectService = [[ProjectService alloc] init];
+    PropertyService * propService = [[PropertyService alloc] init];
+    ZoneService * zoneService = [[ZoneService alloc] init];
+    SubZoneService * subZoneService = [[SubZoneService alloc] init];
+    [VariableStore sharedInstance].creatingTemplate = YES;
     
+    //Delete all existing Templates.
+    [DBStore DeleteAllTemplates];
+    
+    //Create new templates
     [projectService getTemplates:^(BOOL success, NSArray *projects, id errorOrNil)
-    {
-        if (success==YES)
-        {
-            //Save projects and get properties, pictures and zones.
-            for (DSProject * p in projects)
-            {
-                NSLog(@"ID: %@ Title: %@ Template: %@",p.proj_id, p.proj_title, p.proj_isTemplate);
-            }
-        }
-        
-    }];
-     }
+     {
+         @try {
+             if (success==YES)
+             {
+                 //Save projects and get properties and zones.
+                 for (DSProject * p in projects)
+                 {
+                     AUProject * projectCreated = [DBStore CreateProject:p.proj_title AndInfo:p.proj_info AndDate:[NSDate date]];
+                     projectCreated.proj_templateUsed_id = p.proj_id;
+                     projectCreated.proj_templateType = p.proj_templateType;
+                     hud.labelText =  [NSString stringWithFormat:@"%@ %@",[[VariableStore sharedInstance ] Translate: @"Downloaded: "], projectCreated.proj_title];
+                     NSLog(@"Create Project ID: %@ Title: %@ Template: %@",p.proj_id, p.proj_title, p.proj_isTemplate);
+                     //Insert project and get properties for project
+                     if (p.prop_id && p.prop_id >0)
+                     {
+                         [propService getProperties:p.prop_id withResultBlock:^(BOOL success, NSArray *properties, id errorOrNil)
+                          {
+                              AUProperty * propCreated;
+                              for (DSProperty * prop in properties)
+                              {
+                                  if (propCreated==nil)
+                                  {
+                                      propCreated = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_value AndPropertyID:0];
+                                      projectCreated.prop_id = propCreated.prop_id;
+                                  }
+                                  else
+                                  {
+                                      [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_value AndPropertyID:propCreated.prop_id];
+                                  }
+                                  NSLog(@"Project Prop Title: %@ T",prop.prop_title);
+                                  hud.labelText =  [NSString stringWithFormat:@"%@ %@",[[VariableStore sharedInstance ] Translate: @"Downloaded: "], prop.prop_title];
+                                  
+                              }
+                          }];
+                     }
+                     //get the zones
+                     hud.labelText = [[VariableStore sharedInstance ] Translate: @"Download template zones"];
+                     [zoneService getZonesForTemplate:p.proj_id withResultBlock:^(BOOL success, NSArray *zones, id errorOrNil) {
+                         
+                         for (DSZone * z in zones)
+                         {
+                             NSLog(@"Zone Title: %@ T",z.z_title);
+                             AUZone * zoneCreated = [DBStore CreateZone:z.z_title AndInfo:z.z_info AndProjectID:projectCreated.proj_id];
+                             //Get properties and subzones
+                             if (z.prop_id && z.prop_id >0)
+                             {
+                                 
+                                 [propService getProperties:z.prop_id withResultBlock:^(BOOL success, NSArray *properties, id errorOrNil)
+                                  {
+                                      AUProperty * propCreatedForZone;
+                                      for (DSProperty * prop in properties)
+                                      {
+                                          if (propCreatedForZone==nil)
+                                          {
+                                              propCreatedForZone = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_value AndPropertyID:0];
+                                              zoneCreated.prop_id = propCreatedForZone.prop_id;
+                                          }
+                                          else
+                                          {
+                                              [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_value AndPropertyID:propCreatedForZone.prop_id];
+                                          }
+                                          NSLog(@"Zone Prop Title: %@ T",prop.prop_title);
+                                          hud.labelText =  [NSString stringWithFormat:@"%@ %@",[[VariableStore sharedInstance ] Translate: @"Downloaded: "], prop.prop_title];
+                                          
+                                      }
+                                  }];
+                             }
+                             
+                             //Get the subzones
+                             hud.labelText = [[VariableStore sharedInstance ] Translate: @"Download template subzones"];
+                             [subZoneService getSubZonesForTemplate:z.z_id withResultBlock:^(BOOL success, NSArray *subZones, id errorOrNil) {
+                                 for (DSSubZone * sz in subZones)
+                                 {
+                                     NSLog(@"SubZone Title: %@ T",sz.sz_title);
+                                     AUSubZone * subZoneCreated = [DBStore CreateSubZone:sz.sz_title AndInfo:sz.sz_title AndZoneID:zoneCreated.z_id];
+                                     //Get properties and subzones
+                                     if (sz.prop_id && sz.prop_id >0)
+                                     {
+                                         
+                                         [propService getProperties:sz.prop_id withResultBlock:^(BOOL success, NSArray *properties, id errorOrNil)
+                                          {
+                                              AUProperty * propCreatedForSubZone;
+                                              for (DSProperty * prop in properties)
+                                              {
+                                                  if (propCreatedForSubZone==nil)
+                                                  {
+                                                      propCreatedForSubZone = [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_value AndPropertyID:0];
+                                                      subZoneCreated.prop_id = propCreatedForSubZone.prop_id;
+                                                  }
+                                                  else
+                                                  {
+                                                      [DBStore CreateProperty:prop.prop_title AndValue:prop.prop_value AndType:prop.prop_value AndPropertyID:propCreatedForSubZone.prop_id];
+                                                  }
+                                                  hud.labelText =  [NSString stringWithFormat:@"%@ %@",[[VariableStore sharedInstance ] Translate: @"Downloaded: "], prop.prop_title];
+                                                  NSLog(@"SubZone Prop Title: %@ T",prop.prop_title);
+                                              }
+                                          }];
+                                     }
+                                 }
+                                 [hud hide:YES];
+                             }];
+                         }
+                         [hud hide:YES];
+                     }];
+                 }
+             }
+             
+
+         }
+         @catch (NSException *exception) {
+             //Handle error
+         }
+         @finally {
+             [DBStore SaveContext];
+             [VariableStore sharedInstance].creatingTemplate = NO;
+             [hud hide:YES];
+         }
+              }];
+}
 
 
 

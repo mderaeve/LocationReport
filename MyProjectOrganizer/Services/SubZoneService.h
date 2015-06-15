@@ -12,8 +12,10 @@
 @interface SubZoneService : BaseService
 
 typedef void (^SyncSubZoneResultBlock)(BOOL success, id errorOrNil);
+typedef void (^GetSubZonesResultBlock)(BOOL success, NSArray * subZones,  id errorOrNil);
 
--(void) syncSubZone:(DSSubZone *) p withResultHandler:(SyncSubZoneResultBlock) resultHandler;
+-(void) syncSubZone:(DSSubZone *) sz withResultHandler:(SyncSubZoneResultBlock) resultHandler;
 
+-(void) getSubZonesForTemplate:(NSNumber *) z_id withResultBlock:(GetSubZonesResultBlock) resultHandler;
 
 @end

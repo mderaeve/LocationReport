@@ -250,6 +250,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="$PO$ProjectHome" id="wZk-de-rxW"/>
                     <connections>
+                        <outlet property="_UIiAD" destination="obJ-NW-C86" id="cIK-il-lur"/>
                         <outlet property="colProjects" destination="lbg-Lf-yrq" id="CGn-9l-fHX"/>
                         <outlet property="selSort" destination="Zn7-Tp-H0e" id="01t-oi-Q5m"/>
                         <outlet property="txtSearch" destination="bcq-pv-Wpa" id="i4A-2s-xgW"/>
@@ -1063,6 +1064,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="Iac-qC-P59"/>
                     <connections>
+                        <outlet property="_UIiAD" destination="WfG-fE-haQ" id="v47-X9-BRC"/>
                         <outlet property="btnEdit" destination="YOg-Jo-M0W" id="H9S-ZP-Uky"/>
                         <outlet property="colPictures" destination="Xc7-qv-Vwm" id="zbZ-T4-meT"/>
                         <outlet property="colProperties" destination="9IG-xC-llS" id="neV-mF-v08"/>
@@ -1786,6 +1788,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="47e-Jo-lDj"/>
                     <connections>
+                        <outlet property="_UIiAD" destination="wTY-QK-EJf" id="cE3-dg-T6V"/>
                         <outlet property="btnEdit" destination="oZw-oG-1i3" id="VhX-rG-IzM"/>
                         <outlet property="colPictures" destination="hqi-0e-Vit" id="Y9S-Uw-YtO"/>
                         <outlet property="colProperties" destination="mB1-sY-WfT" id="5mB-3G-HiP"/>
@@ -2106,6 +2109,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="xm9-mf-mEk"/>
                     <connections>
+                        <outlet property="_UIiAD" destination="Ptq-cr-Ikg" id="LXO-ip-dyL"/>
                         <outlet property="colPictures" destination="5fa-BT-aMm" id="LNd-cd-EHP"/>
                         <outlet property="colProperties" destination="Qwy-dm-3Mh" id="a2o-N3-Atc"/>
                         <outlet property="lblProjectDate" destination="fdC-OP-MWs" id="CNN-r1-X5C"/>
@@ -2135,9 +2139,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="vn3-Om-sPh"/>
+        <segue reference="1rD-cE-xa3"/>
         <segue reference="IdO-LM-Deg"/>
-        <segue reference="3FU-aP-SKJ"/>
-        <segue reference="Xnv-3Q-dmr"/>
+        <segue reference="NSj-mI-Nqu"/>
+        <segue reference="rZp-68-BqZ"/>
     </inferredMetricsTieBreakers>
 </document>

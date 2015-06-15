@@ -262,6 +262,103 @@
     return nil;
 }
 
++ (AUProject *) GetProjectTemplateByTitle:(NSString *) title
+{
+    NSError *error;
+    NSFetchRequest * checkForProject = [[NSFetchRequest alloc] init];
+    NSEntityDescription * ProjectEntDescr = [NSEntityDescription entityForName:@"AUProject" inManagedObjectContext:[DBStore GetManagedObjectContext]];
+    [checkForProject setEntity:ProjectEntDescr];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"proj_title CONTAINS[cd] %@ and proj_isTemplate = 1", title];
+    [checkForProject setPredicate:predicate];
+    NSArray * Projects = [[DBStore GetManagedObjectContext] executeFetchRequest:checkForProject error:&error];
+    if (Projects != nil && Projects.count>0)
+    {
+        return [Projects objectAtIndex:0];
+    }
+    //Nothing found
+    return nil;
+}
+
++ (void) DeleteAllTemplates
+{
+    NSArray * templates = [DBStore GetAllProjects:[NSNumber numberWithInt:1]];
+    
+    for (AUProject * t in templates)
+    {
+        if (t.prop_id && t.prop_id>0)
+        {
+            NSArray * propertyList = [DBStore GetAllPropertiesForID:t.prop_id];
+            for (AUProperty * t_prop in propertyList)
+            {
+                [DBStore DeleteProperty:t_prop];
+            }
+        }
+        if (t.pic_id && t.pic_id>0)
+        {
+            NSArray * picList = [DBStore GetPicturesID:t.pic_id];
+            for (AUPicture * t_pic in picList)
+            {
+                [DBStore DeletePicture:t_pic];
+            }
+        }
+        
+        NSArray * zoneList = [DBStore GetAllZones:t.proj_id];
+        for (AUZone * z in zoneList)
+        {
+            if (z.prop_id && z.prop_id>0)
+            {
+                NSArray * propertyList = [DBStore GetAllPropertiesForID:z.prop_id];
+                for (AUProperty * z_prop in propertyList)
+                {
+                    [DBStore DeleteProperty:z_prop];
+                }
+            }
+            if (z.pic_id && z.pic_id>0)
+            {
+                NSArray * picList = [DBStore GetPicturesID:z.pic_id];
+                for (AUPicture * z_pic in picList)
+                {
+                    [DBStore DeletePicture:z_pic];
+                }
+            }
+            
+            NSArray * subzoneList = [DBStore GetAllSubZones:z.z_id];
+            
+            for (AUSubZone * sz in subzoneList)
+            {
+                if (sz.prop_id && sz.prop_id>0)
+                {
+                    NSArray * propertyList = [DBStore GetAllPropertiesForID:sz.prop_id];
+                    for (AUProperty * sz_prop in propertyList)
+                    {
+                        [DBStore DeleteProperty:sz_prop];
+                    }
+                }
+                if (sz.pic_id && sz.pic_id>0)
+                {
+                    NSArray * picList = [DBStore GetPicturesID:sz.pic_id];
+                    for (AUPicture * sz_pic in picList)
+                    {
+                        [DBStore DeletePicture:sz_pic];
+                    }
+                }
+                
+                [DBStore DeleteSubZone:sz];
+            }
+            
+            [DBStore DeleteZone:z];
+            
+        }
+        [DBStore DeleteProject:t];
+    }
+}
+
++(void) DeleteProject:(AUProject *)project
+{
+    [[DBStore GetManagedObjectContext] deleteObject:project];
+    [DBStore SaveContext];
+}
+
 #pragma mark Zones
 
 + (AUZone *) CreateZone:(NSString *) title AndInfo:(NSString *) info AndProjectID:(NSNumber *) projectID
@@ -322,6 +419,12 @@
     return nil;
 }
 
++(void) DeleteZone:(AUZone *)zone
+{
+    [[DBStore GetManagedObjectContext] deleteObject:zone];
+    [DBStore SaveContext];
+}
+
 #pragma mark SubZones
 
 + (AUSubZone *) CreateSubZone:(NSString *) title AndInfo:(NSString *) info AndZoneID:(NSNumber *) zoneID;
@@ -378,6 +481,12 @@
     }
     //Nothing found
     return nil;
+}
+
++(void) DeleteSubZone:(AUSubZone *)subZone
+{
+    [[DBStore GetManagedObjectContext] deleteObject:subZone];
+    [DBStore SaveContext];
 }
 
 #pragma mark Properties

@@ -72,7 +72,7 @@
         {
             [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"navigation.png"],@"img",[store Translate:@"$PO$EditTemplates"],@"text", nil]];
         }
-        [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"download.png"],@"img",[store Translate:@"$PO$DownloadTemplates"],@"text", nil]];
+        [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"download.png"],@"img",[store Translate:@"$PO$UpdateTemplates"],@"text", nil]];
         [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"lock.png"],@"img",[store Translate:@"$PO$UserSettings"],@"text", nil]];
         [optionsToSet addObject:[NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"navigation.png"],@"img",[store Translate:@"$PO$Cancel"],@"text", nil]];
         
@@ -134,7 +134,7 @@
     {
         [GeneralFunctions showUserToken:senderVC];
     }
-    else if ([itemText isEqualToString:[[VariableStore sharedInstance]  Translate:@"$PO$DownloadTemplates"]])
+    else if ([itemText isEqualToString:[[VariableStore sharedInstance]  Translate:@"$PO$UpdateTemplates"]])
     {
         //GetTemplatesFromStore
         [SyncService GetTemplates:senderVC.view];

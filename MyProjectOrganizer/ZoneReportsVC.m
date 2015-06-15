@@ -16,6 +16,7 @@
 
 @interface ZoneReportsVC ()
 @property (strong, nonatomic) UIImage * img;
+@property (weak, nonatomic) IBOutlet ADBannerView *_UIiAD;
 @end
 
 @implementation ZoneReportsVC
@@ -492,6 +493,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
         [self.popoverController presentPopoverFromRect:[collectionView frame] inView:self.vwProperties  permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
         
     }
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [self._UIiAD removeFromSuperview];
+    //this._UIiAD.delegate = nil;
+    self._UIiAD = nil;
 }
 
 /*

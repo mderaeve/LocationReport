@@ -17,6 +17,7 @@
 
 @interface ProjectReportsVC ()
 @property (strong, nonatomic) UIImage * img;
+@property (weak, nonatomic) IBOutlet ADBannerView *_UIiAD;
 @end
 
 @implementation ProjectReportsVC
@@ -486,6 +487,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [self._UIiAD removeFromSuperview];
+    //this._UIiAD.delegate = nil;
+    self._UIiAD = nil;
 }
 
 /*

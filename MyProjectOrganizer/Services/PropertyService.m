@@ -22,4 +22,31 @@
      }];
 }
 
+-(void) getProperties:(NSNumber *)prop_id withResultBlock:(GetPropertiesResultBlock)resultHandler
+{
+    NSString *serviceName =  [NSString stringWithFormat:@"Properties/%@",prop_id];
+
+    [self performGetRequest:serviceName withParameters:nil withSuccesHandler:^(NSDictionary* result)
+     {
+         NSMutableArray *results = [NSMutableArray array];
+         if (results)
+         {
+             for(NSDictionary *dict in result){
+                 NSError *error;
+                 DSProperty *p = [[DSProperty alloc] initWithDictionary:dict error:&error];
+                 
+                 if(!error){
+                     [results addObject:p];
+                 } else {
+                     NSLog(@"Error decoding Team: %@", error);
+                 }
+             }
+         }
+         resultHandler(YES, [NSArray arrayWithArray:results], nil);
+     } andErrorHandler:^(NSError *error) {
+         resultHandler(NO, nil, error);
+     }];
+
+}
+
 @end

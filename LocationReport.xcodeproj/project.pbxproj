@@ -15,6 +15,7 @@
 		870DC29819D587B3009498AF /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 870DC29719D587B3009498AF /* pencil.png */; };
 		870DC29D19D58D36009498AF /* TypesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 870DC29B19D58D36009498AF /* TypesManager.m */; };
 		870DC29E19D58D36009498AF /* TypesManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870DC29C19D58D36009498AF /* TypesManager.xib */; };
+		8761BF831B2A2C7C00F7B6C8 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 8761BF821B2A2C7C00F7B6C8 /* download.png */; };
 		8761E4D51A90E7130004A3BE /* ZoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4D41A90E7130004A3BE /* ZoneService.m */; };
 		8761E4D81A90E7230004A3BE /* SubZoneService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4D71A90E7230004A3BE /* SubZoneService.m */; };
 		8761E4DB1A90E7340004A3BE /* PropertyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8761E4DA1A90E7340004A3BE /* PropertyService.m */; };
@@ -54,7 +55,6 @@
 		87D5ABD31A8C7F2900FCD98D /* ProjectService.m in Sources */ = {isa = PBXBuildFile; fileRef = 87D5ABD21A8C7F2900FCD98D /* ProjectService.m */; };
 		87DDA01A19C1925E004A3152 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DDA01919C1925E004A3152 /* edit.png */; };
 		87DDA02019C192FC004A3152 /* ProjectReportsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DDA01F19C192FC004A3152 /* ProjectReportsVC.m */; };
-		87DDA02219C2EBC8004A3152 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DDA02119C2EBC8004A3152 /* download.png */; };
 		87EDAC3619DFF1D10039EBFE /* TemplateFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EDAC3519DFF1D10039EBFE /* TemplateFactory.m */; };
 		9912E2AE19216C340054358B /* TranslationsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9912E2AD19216C340054358B /* TranslationsStoryboard.storyboard */; };
 		9912E2B119216C640054358B /* TranslationsHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 9912E2B019216C640054358B /* TranslationsHomeVC.m */; };
@@ -130,6 +130,7 @@
 		870DC29A19D58D36009498AF /* TypesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypesManager.h; sourceTree = "<group>"; };
 		870DC29B19D58D36009498AF /* TypesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypesManager.m; sourceTree = "<group>"; };
 		870DC29C19D58D36009498AF /* TypesManager.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TypesManager.xib; sourceTree = "<group>"; };
+		8761BF821B2A2C7C00F7B6C8 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
 		8761E4D31A90E7130004A3BE /* ZoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZoneService.h; path = Services/ZoneService.h; sourceTree = "<group>"; };
 		8761E4D41A90E7130004A3BE /* ZoneService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZoneService.m; path = Services/ZoneService.m; sourceTree = "<group>"; };
 		8761E4D61A90E7230004A3BE /* SubZoneService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubZoneService.h; path = Services/SubZoneService.h; sourceTree = "<group>"; };
@@ -203,7 +204,6 @@
 		87DDA01919C1925E004A3152 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		87DDA01E19C192FC004A3152 /* ProjectReportsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProjectReportsVC.h; sourceTree = "<group>"; };
 		87DDA01F19C192FC004A3152 /* ProjectReportsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProjectReportsVC.m; sourceTree = "<group>"; };
-		87DDA02119C2EBC8004A3152 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
 		87EDAC3419DFF1D10039EBFE /* TemplateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TemplateFactory.h; path = MyControls/CustomerView/TemplateFactory.h; sourceTree = "<group>"; };
 		87EDAC3519DFF1D10039EBFE /* TemplateFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TemplateFactory.m; path = MyControls/CustomerView/TemplateFactory.m; sourceTree = "<group>"; };
 		9912E2AD19216C340054358B /* TranslationsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TranslationsStoryboard.storyboard; sourceTree = "<group>"; };
@@ -723,9 +723,9 @@
 		99F2556118FDABCE00FAB43E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8761BF821B2A2C7C00F7B6C8 /* download.png */,
 				87CEDEDD1AB8BA67004B1598 /* movie.png */,
 				870DC29719D587B3009498AF /* pencil.png */,
-				87DDA02119C2EBC8004A3152 /* download.png */,
 				87DDA01919C1925E004A3152 /* edit.png */,
 				997BE01119406D01005002E0 /* add@2x.png */,
 				87670C241ACFE8F700A85A4D /* lock.png */,
@@ -829,6 +829,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				994EAB3118EB163400137F27 /* Main_iPad.storyboard in Resources */,
+				8761BF831B2A2C7C00F7B6C8 /* download.png in Resources */,
 				9912E2AE19216C340054358B /* TranslationsStoryboard.storyboard in Resources */,
 				99CFCBE3190B04E90066EF1F /* skull.png in Resources */,
 				99F2556318FDABDA00FAB43E /* error.png in Resources */,
@@ -853,7 +854,6 @@
 				870DC29819D587B3009498AF /* pencil.png in Resources */,
 				997BBA6319068735008A0626 /* navigation.png in Resources */,
 				9912E325193286520054358B /* search.png in Resources */,
-				87DDA02219C2EBC8004A3152 /* download.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

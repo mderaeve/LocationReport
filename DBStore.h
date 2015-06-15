@@ -45,6 +45,12 @@
 
 + (NSArray *) SearchProject:(NSString *) search;
 
++ (AUProject *) GetProjectTemplateByTitle: (NSString *) title;
+
++ (void) DeleteAllTemplates;
+
++(void) DeleteProject:(AUProject *) project;
+
 #pragma mark Zones
 
 + (AUZone *) CreateZone:(NSString *) title AndInfo:(NSString *) info AndProjectID:(NSNumber *) projectID;
@@ -53,6 +59,8 @@
 
 + (NSArray *) GetAllZones:(NSNumber *) projectID;
 
++ (void) DeleteZone:(AUZone *) zone;
+
 #pragma mark SubZones
 
 + (AUSubZone *) CreateSubZone:(NSString *) title AndInfo:(NSString *) info AndZoneID:(NSNumber *) zoneID;
@@ -60,6 +68,8 @@
 + (NSArray *) GetOpenSubZonesForZone:(NSNumber *) zoneID;
 
 + (NSArray *) GetAllSubZones:(NSNumber *) zoneID;
+
++(void) DeleteSubZone:(AUSubZone *) subZone;
 
 #pragma Persons
 

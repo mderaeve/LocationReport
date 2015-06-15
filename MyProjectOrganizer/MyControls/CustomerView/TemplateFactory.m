@@ -16,7 +16,7 @@
 {
     [VariableStore sharedInstance].selectedProject.proj_templateUsed_id = [VariableStore sharedInstance].selectedTemplate.proj_id;
     [VariableStore sharedInstance].selectedProject.proj_templateType = [VariableStore sharedInstance].selectedTemplate.proj_templateType;
-    [VariableStore sharedInstance].selectedProject.proj_title = [VariableStore sharedInstance].selectedTemplate.proj_title;
+    //[VariableStore sharedInstance].selectedProject.proj_title = [VariableStore sharedInstance].selectedTemplate.proj_title;
     
     if ([DBStore GetAllPropertiesForID:[VariableStore sharedInstance].selectedTemplate.prop_id] != nil)
     {

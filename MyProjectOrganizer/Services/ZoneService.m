@@ -22,4 +22,31 @@
      }];
 }
 
+-(void) getZonesForTemplate:(NSNumber *)proj_id withResultBlock:(GetZonesResultBlock)resultHandler
+{
+    // [Route("api/Zones/ByProjectTemplate/{projectID}")]
+    NSString *serviceName =  [NSString stringWithFormat:@"Zones/ByProjectTemplate/%@",proj_id];
+    
+    [self performGetRequest:serviceName withParameters:nil withSuccesHandler:^(NSDictionary* result)
+     {
+         NSMutableArray *results = [NSMutableArray array];
+         if (results)
+         {
+             for(NSDictionary *dict in result){
+                 NSError *error;
+                 DSZone *z = [[DSZone alloc] initWithDictionary:dict error:&error];
+                 
+                 if(!error){
+                     [results addObject:z];
+                 } else {
+                     NSLog(@"Error decoding Team: %@", error);
+                 }
+             }
+         }
+         resultHandler(YES, [NSArray arrayWithArray:results], nil);
+     } andErrorHandler:^(NSError *error) {
+         resultHandler(NO, nil, error);
+     }];
+}
+
 @end
